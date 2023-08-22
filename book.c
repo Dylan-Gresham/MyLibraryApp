@@ -89,7 +89,21 @@ int DestroyBook(Book * book) {
 }
 
 char * GetTitle(Book * book) {
-    // TODO
+    // Invalid parameter handling
+    if(book == NULL) {
+        return NULL;
+    }
+
+    // Preserve encapsulation by returning a copy of the title and not the title itself
+    char * retStr = malloc(sizeof(char) * strlen(book->title) + sizeof(char)); // Add 1 for the null terminating
+    // Check the variable was malloc'd correctly
+    if(retStr == NULL) {
+        return NULL;
+    } else {
+        strcpy(retStr, book->title); // Copy the title into the return string.
+    }
+
+    return retStr;
 }
 
 char * GetAuthor(Book * book) {
