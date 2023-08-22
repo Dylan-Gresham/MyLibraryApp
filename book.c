@@ -71,7 +71,21 @@ Book * CreateBook(char title[], char author[], int numPages, int rating, bool co
 }
 
 int DestroyBook(Book * book) {
-    // TODO
+    // Invalid parameter handling
+    if(book == NULL) {
+        return -1;
+    }
+
+    // free returns no value so nothing to check for error handling
+    free(book->title);
+    free(book->author);
+    free(book->numPages);
+    free(book->rating);
+    free(book->readingStatus);
+    free(book);
+    book = NULL; // Set pointer to NULL so it can't be used by accident anymore.
+
+    return 0; // Success
 }
 
 char * GetTitle(Book * book) {
