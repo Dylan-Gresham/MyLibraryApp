@@ -20,7 +20,7 @@ typedef struct Book {
  * @param title - A C-string representing the title of the book.
  * @param author - A C-string representing the author of the book.
  * @param numPages - An int representing the number of pages in the book.
- * @param rating - An int representing the rating of the book (negative if you don't want to give a rating yet).
+ * @param rating - An int representing the rating of the book (-1 [negative one] if you don't want to give a rating yet).
  * @param completed - A boolean representing your completion status of the book. True if completed, False if still reading/planned.
  * 
  * @return A pointer to the newly created Book struct, NULL on error.
