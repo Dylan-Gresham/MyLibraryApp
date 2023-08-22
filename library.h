@@ -16,7 +16,7 @@ typedef struct Library {
 } Library;
 
 /**
- * Creates a new Library struct with the specified initial capacity for books
+ * Creates a new Library struct with the specified initial capacity for books.
  * 
  * @param initialSize - The initial capacity of the library
  * 
@@ -44,7 +44,7 @@ int DestroyLibrary(Library * library);
 int AddBook(Library * library, Book * book);
 
 /**
- * Gets the list of books in the specified library
+ * Gets the list of books in the specified library.
  * 
  * @param library - The library to get the books from.
  * 
