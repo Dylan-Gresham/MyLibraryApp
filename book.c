@@ -107,7 +107,21 @@ char * GetTitle(Book * book) {
 }
 
 char * GetAuthor(Book * book) {
-    // TODO
+    // Invalid parameter handling
+    if(book == NULL) {
+        return NULL;
+    }
+
+    // Preserve encapsulation by returning a copy of the title and not the title itself
+    char * retStr = malloc(sizeof(char) * strlen(book->author) + sizeof(char)); // Add 1 for the null terminating
+    // Check the variable was malloc'd correctly
+    if(retStr == NULL) {
+        return NULL;
+    } else {
+        strcpy(retStr, book->author); // Copy the title into the return string.
+    }
+
+    return retStr;
 }
 
 int GetNumPages(Book * book) {
