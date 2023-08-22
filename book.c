@@ -90,7 +90,7 @@ int DestroyBook(Book * book) {
 
 char * GetTitle(Book * book) {
     // Invalid parameter handling
-    if(book == NULL) {
+    if(book == NULL || book->title == NULL) {
         return NULL;
     }
 
@@ -108,7 +108,7 @@ char * GetTitle(Book * book) {
 
 char * GetAuthor(Book * book) {
     // Invalid parameter handling
-    if(book == NULL) {
+    if(book == NULL || book->author == NULL) {
         return NULL;
     }
 
