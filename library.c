@@ -4,34 +4,36 @@
 
 #include "library.h"
 
-Library *CreateLibrary(int initialSize) {
+#include <stdlib.h>
+
+Library * CreateLibrary(int initialSize) {
     // TODO
 }
 
-int DestroyLibrary(Library *library) {
+int DestroyLibrary(Library * library) {
     // TODO
 }
 
-int AddBook(Library *library, Book *book) {
+int AddBook(Library * library, Book * book) {
     // TODO
 }
 
-Book **GetBooks(Library *library) {
+Book ** GetBooks(Library * library) {
     // TODO
 }
 
-int GetNumBooks(Library *library) {
+int GetNumBooks(Library * library) {
     // TODO
 }
 
-int GetNumAuthors(Library *library) {
+int GetNumAuthors(Library * library) {
     // TODO
 }
 
-int SetNumAuthors(Library *library, int newNumAuthors) {
+int SetNumAuthors(Library * library, int newNumAuthors) {
     // TODO
 }
 
-bool IsEmpty(Library *library) {
+bool IsEmpty(Library * library) {
     // TODO
 }
