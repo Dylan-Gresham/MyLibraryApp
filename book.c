@@ -125,7 +125,20 @@ char * GetAuthor(Book * book) {
 }
 
 int GetNumPages(Book * book) {
-    // TODO
+    // Invalid parameter handling
+    if(book == NULL || book->numPages == NULL) {
+        return NULL;
+    }
+
+    // Preserve encapsulation by returning a copy of the title and not the title itself
+    int * retNum = malloc(sizeof(int));
+    if(retNum == NULL) {
+        return NULL;
+    } else {
+        memcpy(retNum, book->numPages, sizeof(int)); // Copy the number of pages
+    }
+
+    return retNum;
 }
 
 int GetRating(Book * book) {
