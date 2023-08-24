@@ -30,9 +30,9 @@ Book * CreateBook(char title[], char author[], int numPages, int rating, int sta
 /**
  * Destroys the specified Book struct, free'ing all used memory in the process.
  * 
- * @param book - A pointer to the Book struct to destroy.
+ * @param book A pointer to the Book struct to destroy.
  * 
- * @return 0 on success, nonzero on error (TODO: List all possible nonzero errors and what they mean).
+ * @return 0 on success, nonzero on error, -1 if the parameter was invalid
 */
 int DestroyBook(Book * book);
 
@@ -59,7 +59,7 @@ char * GetAuthor(Book * book);
  * 
  * @param book - A pointer to the Book struct to get the number of pages from.
  * 
- * @return The total number of pages of the book, nonzero on error (TODO: List all possible nonzero errors and what they mean).
+ * @return The total number of pages of the book, -1 if the parameters are invalid, -2 if malloc fails
 */
 int GetNumPages(Book * book);
 
@@ -68,7 +68,7 @@ int GetNumPages(Book * book);
  * 
  * @param book - A pointer to the Book struct to get the rating from.
  * 
- * @return The rating of the book, nonzero on error (TODO: List all possible nonzero errors and what they mean).
+ * @return The total number of pages of the book, -1 if the parameters are invalid, -2 if malloc fails
 */
 int GetRating(Book * book);
 
@@ -77,7 +77,7 @@ int GetRating(Book * book);
  * 
  * @param book - A pointer to the Book struct to get the reading status from.
  * 
- * @return The reading status of the book, nonzero on error (TODO: List all possible nonzero errors and what they mean).
+ * @return The total number of pages of the book, -1 if the parameters are invalid, -2 if malloc fails
 */
 int GetReadingStatus(Book * book);
 
@@ -87,7 +87,7 @@ int GetReadingStatus(Book * book);
  * @param book - A pointer to the Book struct to update.
  * @param newTitle - A pointer to the C-string to replace the current title of the Book.
  * 
- * @return 0 on success, nonzero on error (TODO: List all possible nonzero errors and what they mean).
+ * @return The total number of pages of the book, -1 if the parameters are invalid, -2 if malloc fails, -3 if replacing fails
 */
 int SetTitle(Book * book, char * newTitle);
 
@@ -97,7 +97,7 @@ int SetTitle(Book * book, char * newTitle);
  * @param book - A pointer to the Book struct to update.
  * @param newAuthor - A pointer to the C-string to replace the current author of the Book.
  * 
- * @return 0 on success, nonzero on error (TODO: List all possible nonzero errors and what they mean).
+ * @return The total number of pages of the book, -1 if the parameters are invalid, -2 if malloc fails, -3 if replacing fails
 */
 int SetAuthor(Book * book, char * newAuthor);
 
@@ -107,7 +107,7 @@ int SetAuthor(Book * book, char * newAuthor);
  * @param book - A pointer to the Book struct to update.
  * @param newNumPages - An int representing the new total number of pages of the specified book. Must be greater than 0 (newNumPages > 0).
  * 
- * @return 0 on success, nonzero on error (TODO: List all possible nonzero errors and what they mean).
+ * @return The total number of pages of the book, -1 if the parameters are invalid, -2 if malloc fails, -3 if replacing fails
 */
 int SetNumPages(Book * book, int newNumPages);
 
@@ -117,7 +117,7 @@ int SetNumPages(Book * book, int newNumPages);
  * @param book - A pointer to the Book struct to update.
  * @param newRating - An int representing the new rating to replace the current rating. Must be between 0 & 100 inclusive (0 <= newRating >= 100).
  * 
- * @return 0 on success, nonzero on error (TODO: List all possible nonzero errors and what they mean).
+ * @return The total number of pages of the book, -1 if the parameters are invalid, -2 if malloc fails, -3 if replacing fails
 */
 int SetRating(Book * book, int newRating);
 
@@ -127,7 +127,7 @@ int SetRating(Book * book, int newRating);
  * @param book - A pointer to the Book struct to update.
  * @param newStatus - An int representing the new completion status of the specified book. Will replace the old status. 0 = planned, 1 = reading, 2 = dropped, 3 = aside, 4 = completed 
  * 
- * @return 0 on success, nonzero on error (TODO: List all possible nonzero errors and what they mean).
+ * @return The total number of pages of the book, -1 if the parameters are invalid, -2 if malloc fails, -3 if replacing fails
 */
 int SetStatus(Book * book, int newStatus);
 
