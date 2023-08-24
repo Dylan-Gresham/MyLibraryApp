@@ -38,7 +38,11 @@ int DestroyLibrary(Library * library);
  * Adds the specified book to the specified library.
  * 
  * @param library - A pointer to the library to add the book into.
- * @param book - A pointer to the book to be added to the library.
+ * @param title - A C-string containing the title of the book to be added
+ * @param author - A C-string containing the author of the book to be added
+ * @param numPages - An int representing the total number of pages in the book
+ * @param rating - An int representing the rating of the book (-1 [negative one] if you don't want to give a rating yet).
+ * @param status - An int representing your reading status of the book. 0 = planned, 1 = reading, 2 = dropped, 3 = aside, 4 = completed 
  * 
  * @return - 0 on success, nonzero on error (TODO: List all possible nonzero errors and what they mean).
 */
