@@ -13,6 +13,7 @@ typedef struct Library {
     int * numBooks;
     int * numAuthors;
     Book ** booksArray;
+    char ** authorsArray;
 } Library;
 
 /**
