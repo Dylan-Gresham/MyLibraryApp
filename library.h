@@ -42,7 +42,7 @@ int DestroyLibrary(Library * library);
  * 
  * @return - 0 on success, nonzero on error (TODO: List all possible nonzero errors and what they mean).
 */
-int AddBook(Library * library, Book * book);
+int AddBook(Library * library, char title[], char author[], int numPages, int rating, int status);
 
 /**
  * Gets the list of books in the specified library.

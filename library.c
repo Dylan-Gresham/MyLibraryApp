@@ -141,7 +141,7 @@ int DestroyLibrary(Library * library) {
     return 0;
 }
 
-int AddBook(Library * library, Book * book) {
+int AddBook(Library * library, char title[], char author[], int numPages, int rating, int status) {
     // TODO
 }
 
