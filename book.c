@@ -20,6 +20,8 @@ Book * CreateBook(char title[], char author[], int numPages, int rating, int sta
     Book * newBook = malloc(sizeof(Book)); // Create new Book pointer
     // Check that the pointer was malloc'd without error
     if(newBook == NULL) {
+        free(newBook);
+
         return NULL;
     }
 
@@ -27,6 +29,9 @@ Book * CreateBook(char title[], char author[], int numPages, int rating, int sta
     newBook->title = malloc(sizeof(char) * strlen(title) + sizeof(char));
     // Check that the pointer was malloc'd without error
     if(newBook->title == NULL) {
+        free(newBook->title);
+        free(newBook);
+
         return NULL;
     } else {
         strcpy(newBook->title, title); // Copy the title into the pointer
@@ -36,6 +41,10 @@ Book * CreateBook(char title[], char author[], int numPages, int rating, int sta
     newBook->author = malloc(sizeof(char) * strlen(author) + sizeof(char));
     // Check that the pointer was malloc'd without error
     if(newBook->author == NULL) {
+        free(newBook->author);
+        free(newBook->title);
+        free(newBook);
+
         return NULL;
     } else {
         strcpy(newBook->author, author); // Copy the author into the pointer;
@@ -45,6 +54,11 @@ Book * CreateBook(char title[], char author[], int numPages, int rating, int sta
     newBook->numPages = malloc(sizeof(int));
     // Check that the pointer was malloc'd without error
     if(newBook->numPages == NULL) {
+        free(newBook->numPages);
+        free(newBook->author);
+        free(newBook->title);
+        free(newBook);
+
         return NULL;
     } else {
         *(newBook->numPages) = numPages; // Dereference then store the number of pages
@@ -54,6 +68,12 @@ Book * CreateBook(char title[], char author[], int numPages, int rating, int sta
     newBook->rating = malloc(sizeof(int));
     // Check that the pointer was malloc'd without error
     if(newBook->rating == NULL) {
+        free(newBook->rating);
+        free(newBook->numPages);
+        free(newBook->author);
+        free(newBook->title);
+        free(newBook);
+
         return NULL;
     } else {
         *(newBook->rating) = rating; // Dereference then store the rating
@@ -62,6 +82,13 @@ Book * CreateBook(char title[], char author[], int numPages, int rating, int sta
     // Create new bookCompleted pointer
     newBook->status = malloc(sizeof(int));
     if(newBook->status == NULL) {
+        free(newBook->status);
+        free(newBook->rating);
+        free(newBook->numPages);
+        free(newBook->author);
+        free(newBook->title);
+        free(newBook);
+
         return NULL;
     } else {
         *(newBook->status) = status; // Dereference then store the completion status
@@ -95,13 +122,8 @@ char * GetTitle(Book * book) {
     }
 
     // Preserve encapsulation by returning a copy of the title and not the title itself
-    char * retStr = malloc(sizeof(char) * strlen(book->title) + sizeof(char)); // Add 1 for the null terminating
-    // Check the variable was malloc'd correctly
-    if(retStr == NULL) {
-        return NULL;
-    } else {
-        strcpy(retStr, book->title); // Copy the title into the return string.
-    }
+    char retStr[strlen(book->title) + 1];
+    strcpy(retStr, book->title);
 
     return retStr;
 }
@@ -112,16 +134,11 @@ char * GetAuthor(Book * book) {
         return NULL;
     }
 
-    // Preserve encapsulation by returning a copy of the title and not the title itself
-    char * retStr = malloc(sizeof(char) * strlen(book->author) + sizeof(char)); // Add 1 for the null terminating
-    // Check the variable was malloc'd correctly
-    if(retStr == NULL) {
-        return NULL;
-    } else {
-        strcpy(retStr, book->author); // Copy the title into the return string.
-    }
+    // Preserve encapsulation by returning a copy of the author and not the author itself
+    char retStr[strlen(book->author) + 1];
+    strcpy(retStr, book->author);
 
-    return retStr;
+    return retStr; 
 }
 
 int GetNumPages(Book * book) {
@@ -130,15 +147,10 @@ int GetNumPages(Book * book) {
         return -1;
     }
 
-    // Preserve encapsulation by returning a copy of the title and not the title itself
-    int * retNum = malloc(sizeof(int));
-    if(retNum == NULL) {
-        return -2;
-    } else {
-        memcpy(retNum, book->numPages, sizeof(int)); // Copy the number of pages
-    }
+    // Preserve encapsulation by returning a copy of the number of pages and not the number of pages itself
+    int retNum = *(book->numPages);
 
-    return *retNum;
+    return retNum;
 }
 
 int GetRating(Book * book) {
@@ -147,15 +159,10 @@ int GetRating(Book * book) {
         return -1;
     }
 
-    // Preserve encapsulation by returning a copy of the title and not the title itself
-    int * retRating = malloc(sizeof(int));
-    if(retRating == NULL) {
-        return -2;
-    } else {
-        memcpy(retRating, book->rating, sizeof(int)); // Copy the rating
-    }
+    // Preserve encapsulation by returning a copy of the rating and not the rating itself
+    int retRating = *(book->rating);
 
-    return *retRating;
+    return retRating;
 }
 
 int GetReadingStatus(Book * book) {
@@ -164,15 +171,10 @@ int GetReadingStatus(Book * book) {
         return -1;
     }
 
-    // Preserve encapsulation by returning a copy of the title and not the title itself
-    int * retStatus = malloc(sizeof(int));
-    if(retStatus == NULL) {
-        return -2;
-    } else {
-        memcpy(retStatus, book->status, sizeof(int)); // Copy the status
-    }
+    // Preserve encapsulation by returning a copy of the status and not the status itself
+    int retStatus = *(book->status);
 
-    return *retStatus;
+    return retStatus;
 }
 
 int SetTitle(Book * book, char * newTitle) {
@@ -181,14 +183,20 @@ int SetTitle(Book * book, char * newTitle) {
         return -1;
     }
 
-    // Check if the book's title member is null, if it is, create a new one via malloc.
-    if(book->title == NULL) {
-        char * newTitleMember = malloc(sizeof(char) * strlen(newTitle) + sizeof(char)); // + 1 for null terminating
-        if(newTitleMember == NULL) {
-            return -2;
-        } else {
-            book->title = newTitleMember;
-        }
+    char oldTitle[] = NULL;
+    if(book->title != NULL) {
+        oldTitle[strlen(book->title) + 1];
+    }
+
+    // Allocate memory for the new title
+    char * newTitleMember = malloc(sizeof(char) * strlen(newTitle) + sizeof(char)); // + 1 for null terminating
+    if(newTitleMember == NULL) {
+        free(newTitleMember);
+
+        return -2;
+    } else {
+        free(book->title); // Free old title
+        book->title = newTitleMember; // Assign new title
     }
 
     // Replace old title with new title
@@ -198,6 +206,10 @@ int SetTitle(Book * book, char * newTitle) {
     if(strcmp(book->title, newTitle)) {
         return 0; // Return success if copied correctly.
     } else {
+        free(book->title); // Free whatever got copied over
+        book->title = malloc(sizeof(char) * strlen(oldTitle) + sizeof(char));
+        strcpy(book->title, oldTitle); // Put old title back
+
         return -3; // Return nonzero if copied incorrectly.
     }
 }
@@ -208,23 +220,33 @@ int SetAuthor(Book * book, char * newAuthor) {
         return -1;
     }
 
-    // Check if the book's author member is null, if it is, create a new one via malloc.
-    if(book->author == NULL) {
-        char * newAuthorMember = malloc(sizeof(char) * strlen(newAuthor) + sizeof(char)); // + 1 for null terminating
-        if(newAuthorMember == NULL) {
-            return -2;
-        } else {
-            book->author = newAuthorMember;
-        }
+    char oldAuthor[] = NULL;
+    if(book->author != NULL) {
+        oldAuthor[strlen(book->author) + 1];
     }
 
-    // Replace old title with new title
+    // Allocate memory for the new author
+    char * newAuthorMember = malloc(sizeof(char) * strlen(newAuthor) + sizeof(char)); // + 1 for null terminating
+    if(newAuthorMember == NULL) {
+        free(newAuthorMember);
+
+        return -2;
+    } else {
+        free(book->author); // Free old author
+        book->author = newAuthorMember; // Assign new author
+    }
+
+    // Replace old author with new author
     strcpy(book->author, newAuthor); // `strcpy` copies the null terminating and we want to replace so no need to use `strncpy`
 
-    // Validate that `strcpy` copied the correct string.
+    // Validate that strcpy copied the correct string.
     if(strcmp(book->author, newAuthor)) {
         return 0; // Return success if copied correctly.
     } else {
+        free(book->author); // Free whatever got copied over
+        book->author = malloc(sizeof(char) * strlen(oldAuthor) + sizeof(char));
+        strcpy(book->author, oldAuthor); // Put old author back
+
         return -3; // Return nonzero if copied incorrectly.
     }
 }
@@ -235,24 +257,33 @@ int SetNumPages(Book * book, int newNumPages) {
         return -1;
     }
 
+    int oldNumPages = NULL;
+
     // Check if the book's numPages member is null, if it is, create a new one via malloc.
     if(book->numPages == NULL) {
+        free(book->numPages); // Just in case
+
         int * newNumPagesMember = malloc(sizeof(int));
         // Validate that the new numPages member was malloc'd properly.
         if(newNumPagesMember == NULL) {
+            free(newNumPagesMember);
+
             return -2;
         } else {
+            *newNumPagesMember = newNumPages;
             book->numPages = newNumPagesMember; // Assign
         }
+    } else {
+        oldNumPages = *(book->numPages);
+        *(book->numPages) = newNumPages;
     }
-
-    // Replace old numPages with newNumPages
-    *(book->numPages) = newNumPages;
-
+    
     // Validate the value was actually copied.
     if(*(book->numPages) == newNumPages) {
         return 0;
     } else {
+        *(book->numPages) = oldNumPages;
+
         return -3;
     }
 }
@@ -263,24 +294,33 @@ int SetRating(Book * book, int newRating) {
         return -1;
     }
 
+    int oldRating = NULL;
+
     // Check if the book's rating member is null, if it is, create a new one via malloc.
     if(book->rating == NULL) {
+        free(book->rating); // Just in case
+
         int * newRatingMember = malloc(sizeof(int));
         // Validate that the new rating member was malloc'd properly.
         if(newRatingMember == NULL) {
+            free(newRatingMember);
+
             return -2;
         } else {
+            *newRatingMember = newRating;
             book->rating = newRatingMember; // Assign
         }
+    } else {
+        oldRating = *(book->rating);
+        *(book->rating) = newRating;
     }
-
-    // Replace old numPages with newRating
-    *(book->rating) = newRating;
 
     // Validate the value was actually copied.
     if(*(book->rating) == newRating) {
         return 0;
     } else {
+        *(book->rating) = oldRating;
+
         return -3;
     }
 }
@@ -291,24 +331,33 @@ int SetStatus(Book * book, int newStatus) {
         return -1;
     }
 
+    int oldStatus = NULL;
+
     // Check if the book's status member is null, if it is, create a new one via malloc.
     if(book->status == NULL) {
+        free(book->status); // Just in case
+
         int * newStatusMember = malloc(sizeof(int));
         // Validate that the newStatusMember was malloc'd correctly
         if(newStatusMember == NULL) {
+            free(newStatusMember);
+
             return -2;
         } else {
+            *newStatusMember = newStatus;
             book->status = newStatusMember; // Assign
         }
+    } else {
+        oldStatus = *(book->status);
+        *(book->status) = newStatus;
     }
-
-    // Replace old status with new status
-    *(book->status) = newStatus;
 
     // Validate that the status was copied correctly
     if(*(book->status) == newStatus) {
         return 0;
     } else {
+        *(book->status) = oldStatus;
+
         return -3;
     }
 }
