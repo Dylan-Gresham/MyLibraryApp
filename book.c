@@ -258,7 +258,31 @@ int SetNumPages(Book * book, int newNumPages) {
 }
 
 int SetRating(Book * book, int newRating) {
-    // TODO
+    // Invalid parameter handling
+    if(book == NULL || newRating == NULL) {
+        return -1;
+    }
+
+    // Check if the book's rating member is null, if it is, create a new one via malloc.
+    if(book->rating == NULL) {
+        int * newRatingMember = malloc(sizeof(int));
+        // Validate that the new rating member was malloc'd properly.
+        if(newRatingMember == NULL) {
+            return -2;
+        } else {
+            book->rating = newRatingMember; // Assign
+        }
+    }
+
+    // Replace old numPages with newRating
+    *(book->rating) = newRating;
+
+    // Validate the value was actually copied.
+    if(*(book->rating) == newRating) {
+        return 0;
+    } else {
+        return -3;
+    }
 }
 
 int SetReadingStatus(Book * book, bool newStatus) {
