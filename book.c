@@ -60,11 +60,11 @@ Book * CreateBook(char title[], char author[], int numPages, int rating, int sta
     }
 
     // Create new bookCompleted pointer
-    newBook->readingStatus = malloc(sizeof(int));
-    if(newBook->readingStatus == NULL) {
+    newBook->status = malloc(sizeof(int));
+    if(newBook->status == NULL) {
         return NULL;
     } else {
-        *(newBook->readingStatus) = status; // Dereference then store the completion status
+        *(newBook->status) = status; // Dereference then store the completion status
     }
 
     return newBook; // If reaching this point, everything else above passed so it's fine to do no checks.
@@ -81,7 +81,7 @@ int DestroyBook(Book * book) {
     free(book->author);
     free(book->numPages);
     free(book->rating);
-    free(book->readingStatus);
+    free(book->status);
     free(book);
     book = NULL; // Set pointer to NULL so it can't be used by accident anymore.
 
@@ -160,7 +160,7 @@ int GetRating(Book * book) {
 
 int GetReadingStatus(Book * book) {
     // Invalid parameter handling
-    if(book == NULL || book->readingStatus == NULL) {
+    if(book == NULL || book->status == NULL) {
         return NULL;
     }
 
@@ -169,7 +169,7 @@ int GetReadingStatus(Book * book) {
     if(retStatus == NULL) {
         return NULL;
     } else {
-        memcpy(retStatus, book->readingStatus, sizeof(int)); // Copy the status
+        memcpy(retStatus, book->status, sizeof(int)); // Copy the status
     }
 
     return *retStatus;
@@ -285,6 +285,6 @@ int SetRating(Book * book, int newRating) {
     }
 }
 
-int SetReadingStatus(Book * book, bool newStatus) {
+int SetStatus(Book * book, int newStatus) {
     // TODO
 }

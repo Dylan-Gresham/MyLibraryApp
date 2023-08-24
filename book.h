@@ -129,6 +129,6 @@ int SetRating(Book * book, int newRating);
  * 
  * @return 0 on success, nonzero on error (TODO: List all possible nonzero errors and what they mean).
 */
-int SetReadingStatus(Book * book, bool newStatus);
+int SetStatus(Book * book, int newStatus);
 
 #endif //INC_MYLIBRARYAPP_BOOK_H
