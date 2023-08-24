@@ -7,9 +7,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-Book * CreateBook(char title[], char author[], int numPages, int rating, bool completed) {
+Book * CreateBook(char title[], char author[], int numPages, int rating, int status) {
     // Invalid parameter handling
-    if(title == NULL || author == NULL || numPages == NULL || rating == NULL || completed == NULL) {
+    if(title == NULL || author == NULL || numPages == NULL || rating == NULL || status == NULL) {
         return NULL;
     } else if(numPages < 1) {
         return NULL;
@@ -60,11 +60,11 @@ Book * CreateBook(char title[], char author[], int numPages, int rating, bool co
     }
 
     // Create new bookCompleted pointer
-    newBook->readingStatus = malloc(sizeof(bool));
+    newBook->readingStatus = malloc(sizeof(int));
     if(newBook->readingStatus == NULL) {
         return NULL;
     } else {
-        *(newBook->readingStatus) = completed; // Dereference then store the completion status
+        *(newBook->readingStatus) = status; // Dereference then store the completion status
     }
 
     return newBook; // If reaching this point, everything else above passed so it's fine to do no checks.
@@ -138,7 +138,7 @@ int GetNumPages(Book * book) {
         memcpy(retNum, book->numPages, sizeof(int)); // Copy the number of pages
     }
 
-    return retNum;
+    return *retNum;
 }
 
 int GetRating(Book * book) {
@@ -155,24 +155,24 @@ int GetRating(Book * book) {
         memcpy(retRating, book->rating, sizeof(int)); // Copy the rating
     }
 
-    return retRating;
+    return *retRating;
 }
 
-bool GetReadingStatus(Book * book) {
+int GetReadingStatus(Book * book) {
     // Invalid parameter handling
     if(book == NULL || book->readingStatus == NULL) {
         return NULL;
     }
 
     // Preserve encapsulation by returning a copy of the title and not the title itself
-    int * retStatus = malloc(sizeof(bool));
+    int * retStatus = malloc(sizeof(int));
     if(retStatus == NULL) {
         return NULL;
     } else {
-        memcpy(retStatus, book->readingStatus, sizeof(bool)); // Copy the status
+        memcpy(retStatus, book->readingStatus, sizeof(int)); // Copy the status
     }
 
-    return retStatus;
+    return *retStatus;
 }
 
 int SetTitle(Book * book, char * newTitle) {
