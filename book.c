@@ -286,5 +286,29 @@ int SetRating(Book * book, int newRating) {
 }
 
 int SetStatus(Book * book, int newStatus) {
-    // TODO
+    // Invalid parameter handling
+    if(book == NULL || newStatus == NULL) {
+        return -1;
+    }
+
+    // Check if the book's status member is null, if it is, create a new one via malloc.
+    if(book->status == NULL) {
+        int * newStatusMember = malloc(sizeof(int));
+        // Validate that the newStatusMember was malloc'd correctly
+        if(newStatusMember == NULL) {
+            return -2;
+        } else {
+            book->status = newStatusMember; // Assign
+        }
+    }
+
+    // Replace old status with new status
+    *(book->status) = newStatus;
+
+    // Validate that the status was copied correctly
+    if(*(book->status) == newStatus) {
+        return 0;
+    } else {
+        return -3;
+    }
 }
