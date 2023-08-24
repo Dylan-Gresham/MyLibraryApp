@@ -30,7 +30,7 @@ Library * CreateLibrary(int initialSize);
  * 
  * @param library - A pointer to the library to be destroyed, will be set to NULL if successfully deleted.
  * 
- * @return 0 on success, nonzero on error (TODO: List all possible nonzero errors and what they mean).
+ * @return 0 on success, -1 if parameter is null
 */
 int DestroyLibrary(Library * library);
 
