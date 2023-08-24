@@ -11,7 +11,7 @@ typedef struct Book {
     char * author;
     int * numPages;
     int * rating;
-    bool * readingStatus;
+    int * status;
 } Book;
 
 /**
