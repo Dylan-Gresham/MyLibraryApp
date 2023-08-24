@@ -21,11 +21,11 @@ typedef struct Book {
  * @param author - A C-string representing the author of the book.
  * @param numPages - An int representing the number of pages in the book.
  * @param rating - An int representing the rating of the book (-1 [negative one] if you don't want to give a rating yet).
- * @param completed - A boolean representing your completion status of the book. True if completed, False if still reading/planned.
+ * @param status - An int representing your reading status of the book. 0 = planned, 1 = reading, 2 = dropped, 3 = aside, 4 = completed 
  * 
  * @return A pointer to the newly created Book struct, NULL on error.
 */
-Book * CreateBook(char title[], char author[], int numPages, int rating, bool completed);
+Book * CreateBook(char title[], char author[], int numPages, int rating, int status);
 
 /**
  * Destroys the specified Book struct, free'ing all used memory in the process.
@@ -79,7 +79,7 @@ int GetRating(Book * book);
  * 
  * @return The reading status of the book, nonzero on error (TODO: List all possible nonzero errors and what they mean).
 */
-bool GetReadingStatus(Book * book);
+int GetReadingStatus(Book * book);
 
 /**
  * Sets the title of the specified Book to the specified title.
