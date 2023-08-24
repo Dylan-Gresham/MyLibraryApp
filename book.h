@@ -125,7 +125,7 @@ int SetRating(Book * book, int newRating);
  * Sets the reading status of the specified Book to the specified new status.
  * 
  * @param book - A pointer to the Book struct to update.
- * @param newStatus - A bool representing the new completion status of the specified book. Will replace the old status. True means you have finished reading the book, False means you have NOT finished reading the book.
+ * @param newStatus - An int representing the new completion status of the specified book. Will replace the old status. 0 = planned, 1 = reading, 2 = dropped, 3 = aside, 4 = completed 
  * 
  * @return 0 on success, nonzero on error (TODO: List all possible nonzero errors and what they mean).
 */
