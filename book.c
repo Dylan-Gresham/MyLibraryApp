@@ -181,7 +181,7 @@ int SetTitle(Book * book, char * newTitle) {
         return -1;
     }
 
-    // Check if the book's title member is null, if it is, create a new one via malloc
+    // Check if the book's title member is null, if it is, create a new one via malloc.
     if(book->title == NULL) {
         char * newTitleMember = malloc(sizeof(char) * strlen(newTitle) + sizeof(char)); // + 1 for null terminating
         if(newTitleMember == NULL) {
@@ -208,7 +208,7 @@ int SetAuthor(Book * book, char * newAuthor) {
         return -1;
     }
 
-    // Check if the book's author member is null, if it is, create a new one via malloc
+    // Check if the book's author member is null, if it is, create a new one via malloc.
     if(book->author == NULL) {
         char * newAuthorMember = malloc(sizeof(char) * strlen(newAuthor) + sizeof(char)); // + 1 for null terminating
         if(newAuthorMember == NULL) {
@@ -230,7 +230,31 @@ int SetAuthor(Book * book, char * newAuthor) {
 }
 
 int SetNumPages(Book * book, int newNumPages) {
-    // TODO
+    // Invalid parameter handling
+    if(book == NULL || newNumPages == NULL) {
+        return -1;
+    }
+
+    // Check if the book's numPages member is null, if it is, create a new one via malloc.
+    if(book->numPages == NULL) {
+        int * newNumPagesMember = malloc(sizeof(int));
+        // Validate that the new numPages member was malloc'd properly.
+        if(newNumPagesMember == NULL) {
+            return -2;
+        } else {
+            book->numPages = newNumPagesMember; // Assign
+        }
+    }
+
+    // Replace old numPages with newNumPages
+    *(book->numPages) = newNumPages;
+
+    // Validate the value was actually copied.
+    if(*(book->numPages) == newNumPages) {
+        return 0;
+    } else {
+        return -3;
+    }
 }
 
 int SetRating(Book * book, int newRating) {
