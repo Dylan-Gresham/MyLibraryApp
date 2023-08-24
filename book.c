@@ -159,7 +159,20 @@ int GetRating(Book * book) {
 }
 
 bool GetReadingStatus(Book * book) {
-    // TODO
+    // Invalid parameter handling
+    if(book == NULL || book->readingStatus == NULL) {
+        return NULL;
+    }
+
+    // Preserve encapsulation by returning a copy of the title and not the title itself
+    int * retStatus = malloc(sizeof(bool));
+    if(retStatus == NULL) {
+        return NULL;
+    } else {
+        memcpy(retStatus, book->readingStatus, sizeof(bool)); // Copy the status
+    }
+
+    return retStatus;
 }
 
 int SetTitle(Book * book, char * newTitle) {
