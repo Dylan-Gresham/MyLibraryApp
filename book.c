@@ -176,11 +176,57 @@ int GetReadingStatus(Book * book) {
 }
 
 int SetTitle(Book * book, char * newTitle) {
-    // TODO
+    // Invalid parameter handling
+    if(book == NULL || newTitle == NULL) {
+        return -1;
+    }
+
+    // Check if the book's title member is null, if it is, create a new one via malloc
+    if(book->title == NULL) {
+        char * newTitleMember = malloc(sizeof(char) * strlen(newTitle) + sizeof(char)); // + 1 for null terminating
+        if(newTitleMember == NULL) {
+            return -2;
+        } else {
+            book->title = newTitleMember;
+        }
+    }
+
+    // Replace old title with new title
+    strcpy(book->title, newTitle); // strcpy copies the null terminating and we want to replace so no need to use `strncpy`
+
+    // Validate that strcpy copied the correct string.
+    if(strcmp(book->title, newTitle)) {
+        return 0; // Return success if copied correctly.
+    } else {
+        return -3; // Return nonzero if copied incorrectly.
+    }
 }
 
 int SetAuthor(Book * book, char * newAuthor) {
-    // TODO
+    // Invalid parameter handling
+    if(book == NULL || newAuthor == NULL) {
+        return -1;
+    }
+
+    // Check if the book's author member is null, if it is, create a new one via malloc
+    if(book->author == NULL) {
+        char * newAuthorMember = malloc(sizeof(char) * strlen(newAuthor) + sizeof(char)); // + 1 for null terminating
+        if(newAuthorMember == NULL) {
+            return -2;
+        } else {
+            book->author = newAuthorMember;
+        }
+    }
+
+    // Replace old title with new title
+    strcpy(book->author, newAuthor); // `strcpy` copies the null terminating and we want to replace so no need to use `strncpy`
+
+    // Validate that `strcpy` copied the correct string.
+    if(strcmp(book->author, newAuthor)) {
+        return 0; // Return success if copied correctly.
+    } else {
+        return -3; // Return nonzero if copied incorrectly.
+    }
 }
 
 int SetNumPages(Book * book, int newNumPages) {
