@@ -127,13 +127,13 @@ char * GetAuthor(Book * book) {
 int GetNumPages(Book * book) {
     // Invalid parameter handling
     if(book == NULL || book->numPages == NULL) {
-        return NULL;
+        return -1;
     }
 
     // Preserve encapsulation by returning a copy of the title and not the title itself
     int * retNum = malloc(sizeof(int));
     if(retNum == NULL) {
-        return NULL;
+        return -2;
     } else {
         memcpy(retNum, book->numPages, sizeof(int)); // Copy the number of pages
     }
@@ -144,13 +144,13 @@ int GetNumPages(Book * book) {
 int GetRating(Book * book) {
     // Invalid parameter handling
     if(book == NULL || book->rating == NULL) {
-        return NULL;
+        return -1;
     }
 
     // Preserve encapsulation by returning a copy of the title and not the title itself
     int * retRating = malloc(sizeof(int));
     if(retRating == NULL) {
-        return NULL;
+        return -2;
     } else {
         memcpy(retRating, book->rating, sizeof(int)); // Copy the rating
     }
@@ -161,13 +161,13 @@ int GetRating(Book * book) {
 int GetReadingStatus(Book * book) {
     // Invalid parameter handling
     if(book == NULL || book->status == NULL) {
-        return NULL;
+        return -1;
     }
 
     // Preserve encapsulation by returning a copy of the title and not the title itself
     int * retStatus = malloc(sizeof(int));
     if(retStatus == NULL) {
-        return NULL;
+        return -2;
     } else {
         memcpy(retStatus, book->status, sizeof(int)); // Copy the status
     }
