@@ -1,4 +1,5 @@
 //
+// Book.h
 // Created by Dylan Gresham on 8/25/23.
 //
 
@@ -34,28 +35,28 @@ class Book {
         *
         * @return The title of the book
         */
-        std::string GetTitle();
+        std::string getTitle();
 
         /**
          * Gets the author of this Book
          *
          * @return The author of the Book
          */
-        std::string GetAuthor();
+        std::string getAuthor();
 
         /**
         * Gets the total number of pages of this Book.
         *
         * @return The total number of pages of the book
         */
-        int GetNumPages();
+        int getNumPages();
 
         /**
          * Gets the rating of this Book.
          *
          * @return The total number of pages of this book
         */
-        int GetRating();
+        int getRating();
 
 
         /**
@@ -63,7 +64,7 @@ class Book {
          *
          * @return The total number of pages of this book
         */
-        int GetReadingStatus();
+        int getReadingStatus();
 
         /**
          * Sets the title of this Book to the specified title.
@@ -72,7 +73,7 @@ class Book {
          *
          * @return 0 on success, nonzero on error
         */
-        int SetTitle(std::string newTitle);
+        void setTitle(std::string newTitle);
 
         /**
          * Sets the author of this Book to the specified author.
@@ -81,7 +82,7 @@ class Book {
          *
          * @return 0 on success, nonzero on error
         */
-        int SetAuthor(std::string newAuthor);
+        void setAuthor(std::string newAuthor);
 
         /**
          * Sets the total number of pages of this Book to the specified total number of pages.
@@ -90,7 +91,7 @@ class Book {
          *
          * @return 0 on success, nonzero on error
         */
-        int SetNumPages(int newNumPages);
+        void setNumPages(int newNumPages);
 
         /**
          * Sets the rating of this Book to the specified new rating.
@@ -99,7 +100,7 @@ class Book {
          *
          * @return 0 on success, nonzero on error
         */
-        int SetRating(int newRating);
+        void setRating(int newRating);
 
         /**
          * Sets the reading status of this Book to the specified new status.
@@ -108,7 +109,7 @@ class Book {
          *
          * @return 0 on success, nonzero on error
         */
-        int SetStatus(int newStatus);
+        void setStatus(int newStatus);
 };
 
 #endif //MYLIBRARYAPP_BOOK_H

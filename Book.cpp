@@ -1,4 +1,5 @@
 //
+// Book.cpp
 // Created by Dylan Gresham on 8/25/23.
 //
 
@@ -12,52 +13,42 @@ Book::Book(std::string title, std::string author, int numPages, int rating, int 
     this->status = status;
 }
 
-std::string Book::GetTitle() {
+std::string Book::getTitle() {
     return this->title;
 }
 
-std::string Book::GetAuthor() {
+std::string Book::getAuthor() {
     return this->author;
 }
 
-int Book::GetNumPages() {
+int Book::getNumPages() {
     return this->numPages;
 }
 
-int Book::GetRating() {
+int Book::getRating() {
     return this->rating;
 }
 
-int Book::GetReadingStatus() {
+int Book::getReadingStatus() {
     return this->status;
 }
 
-int Book::SetTitle(std::string newTitle) {
+void Book::setTitle(std::string newTitle) {
     this->title = newTitle;
-
-    return 0;
 }
 
-int Book::SetAuthor(std::string newAuthor) {
+void Book::setAuthor(std::string newAuthor) {
     this->author = newAuthor;
-
-    return 0;
 }
 
-int Book::SetNumPages(int newNumPages) {
+void Book::setNumPages(int newNumPages) {
     this->numPages = newNumPages;
-
-    return 0;
 }
 
-int Book::SetRating(int newRating) {
+void Book::setRating(int newRating) {
     this->rating = newRating;
-
-    return 0;
 }
 
-int Book::SetStatus(int newStatus) {
+void Book::setStatus(int newStatus) {
     this->status = newStatus;
-
-    return 0;
 }
