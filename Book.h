@@ -6,11 +6,12 @@
 #define MYLIBRARYAPP_BOOK_H
 
 #include <string>
+using namespace std;
 
 class Book {
     private:
-        string title;
-        string author;
+        std::string title;
+        std::string author;
         int numPages;
         int rating;
         int status;
@@ -33,14 +34,14 @@ class Book {
         *
         * @return The title of the book
         */
-        string GetTitle();
+        std::string GetTitle();
 
         /**
          * Gets the author of this Book
          *
          * @return The author of the Book
          */
-        string GetAuthor();
+        std::string GetAuthor();
 
         /**
         * Gets the total number of pages of this Book.
@@ -71,7 +72,7 @@ class Book {
          *
          * @return 0 on success, nonzero on error
         */
-        int SetTitle(string newTitle);
+        int SetTitle(std::string newTitle);
 
         /**
          * Sets the author of this Book to the specified author.
@@ -80,7 +81,7 @@ class Book {
          *
          * @return 0 on success, nonzero on error
         */
-        int SetAuthor(string newAuthor);
+        int SetAuthor(std::string newAuthor);
 
         /**
          * Sets the total number of pages of this Book to the specified total number of pages.
