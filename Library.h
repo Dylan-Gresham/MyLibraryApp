@@ -20,13 +20,11 @@ class Library {
         std::map<string, int> authorsMap;
     public:
         /**
-         * Creates a new Library object with the specified initial capacity for books.
-         *
-         * @param initialSize - The initial capacity of the library
+         * Creates a new Library object for books.
          *
          * @return A newly created Library object
          */
-        Library(int initialCapacity);
+        Library();
 
         /**
          * Adds the specified book to the library.

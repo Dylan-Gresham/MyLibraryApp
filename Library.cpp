@@ -6,7 +6,7 @@
 #include "Library.h"
 using namespace std;
 
-Library::Library(int initialCapacity) {
+Library::Library() {
     this->numBooks = 0;
     this->numAuthors = 0;
     // Don't need to initialize booksVector or authorsMap as they are created as empty
@@ -14,7 +14,7 @@ Library::Library(int initialCapacity) {
 }
 
 void Library::addBook(std::string title, std::string author, int numPages, int rating, int status) {
-    Book newBook = new Book(title, author, numPages, rating, status);
+    Book newBook = Book(title, author, numPages, rating, status);
     this->booksVector.push_back(newBook);
     this->numBooks = this->booksVector.size();
     /*
