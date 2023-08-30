@@ -91,28 +91,31 @@ void MainWindow::on_searchButton_clicked()
     dialog->setModal(true);
     dialog->exec();
 
-    // Get the book to search for
-    std::string searchTitle = dialog->getQuery();
+    // Determine if we should search or not
+    if(dialog->doSearch()) {
+        // Get the book to search for
+        std::string searchTitle = dialog->getQuery();
 
-    bool found = false;
-    QTableWidgetItem * item;
-    for(int row = 0; row < this->ui->bookTable->rowCount(); row++)
-    {
-        if(this->ui->bookTable->item(row, 0)->text().toStdString().compare(searchTitle) == 0) {
-            found = true;
-            item = this->ui->bookTable->item(row, 0);
-            break;
+        bool found = false;
+        QTableWidgetItem * item;
+        for(int row = 0; row < this->ui->bookTable->rowCount(); row++)
+        {
+            if(this->ui->bookTable->item(row, 0)->text().toStdString().compare(searchTitle) == 0) {
+                found = true;
+                item = this->ui->bookTable->item(row, 0);
+                break;
+            }
         }
-    }
 
-    if(found) {
-        QModelIndex idx = this->ui->bookTable->indexFromItem(item);
-        this->ui->bookTable->scrollTo(idx);
-    } else {
-        QMessageBox::information(this, tr("LibraryApp"),
-                                 QString::fromStdString(searchTitle +
-                                                        " was not found in your Library."),
-                                 QMessageBox::Ok);
+        if(found) {
+            QModelIndex idx = this->ui->bookTable->indexFromItem(item);
+            this->ui->bookTable->scrollTo(idx);
+        } else {
+            QMessageBox::information(this, tr("LibraryApp"),
+                                     QString::fromStdString(searchTitle +
+                                                            " was not found in your Library."),
+                                     QMessageBox::Ok);
+        }
     }
 }
 

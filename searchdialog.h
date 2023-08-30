@@ -14,6 +14,8 @@ class SearchDialog : public QDialog
 
 public:
     std::string getQuery();
+    bool doSearch();
+    bool search;
 
     explicit SearchDialog(QWidget *parent = nullptr);
     ~SearchDialog();

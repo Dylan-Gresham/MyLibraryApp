@@ -15,15 +15,17 @@ SearchDialog::~SearchDialog()
 
 void SearchDialog::done(int r)
 {
-    if(QDialog::Accepted) { // OK was pressed
+    if(QDialog::Accepted == r) { // OK was pressed
         // Validate input
         if(this->ui->queryBox->text().size() > 0) {
+            this->search = true;
             QDialog::done(r);
             return;
         } else { // Invalid input
             return;
         }
     } else { // Cancel, close, or exc was pressed
+        this->search = false;
         QDialog::done(r);
         return;
     }
@@ -31,6 +33,10 @@ void SearchDialog::done(int r)
 
 std::string SearchDialog::getQuery() {
     return this->ui->queryBox->text().toStdString();
+}
+
+bool SearchDialog::doSearch() {
+    return this->search;
 }
 
 void SearchDialog::on_buttonBox_accepted()
