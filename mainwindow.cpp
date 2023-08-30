@@ -7,9 +7,12 @@
 #include "ui_mainwindow.h"
 #include "newdialog.h"
 #include "globalvars.h"
+#include "searchdialog.h"
 
-#include <QTableWidgetItem>
 #include <QString>
+#include <QModelIndex>
+#include <QTableWidgetItem>
+#include <QMessageBox>
 
 int bookAddition;
 
@@ -78,6 +81,38 @@ void MainWindow::on_newButton_clicked()
         this->ui->bookTable->setItem(this->ui->bookTable->rowCount() - 1, 4, new QTableWidgetItem(ratingQStr));
 
         bookAddition = 0;
+    }
+}
+
+void MainWindow::on_searchButton_clicked()
+{
+    // Opens a new dialog menu with the MainWindow being the parent
+    SearchDialog * dialog = new SearchDialog(this);
+    dialog->setModal(true);
+    dialog->exec();
+
+    // Get the book to search for
+    std::string searchTitle = dialog->getQuery();
+
+    bool found = false;
+    QTableWidgetItem * item;
+    for(int row = 0; row < this->ui->bookTable->rowCount(); row++)
+    {
+        if(this->ui->bookTable->item(row, 0)->text().toStdString().compare(searchTitle) == 0) {
+            found = true;
+            item = this->ui->bookTable->item(row, 0);
+            break;
+        }
+    }
+
+    if(found) {
+        QModelIndex idx = this->ui->bookTable->indexFromItem(item);
+        this->ui->bookTable->scrollTo(idx);
+    } else {
+        QMessageBox::information(this, tr("LibraryApp"),
+                                 QString::fromStdString(searchTitle +
+                                                        " was not found in your Library."),
+                                 QMessageBox::Ok);
     }
 }
 

@@ -40,7 +40,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="delButton">
+       <widget class="QPushButton" name="searchButton">
         <property name="text">
          <string>Search</string>
         </property>
@@ -74,7 +74,7 @@
          <bool>true</bool>
         </property>
         <property name="rowCount">
-         <number>1</number>
+         <number>0</number>
         </property>
         <property name="columnCount">
          <number>7</number>
@@ -106,7 +106,6 @@
         <attribute name="verticalHeaderStretchLastSection">
          <bool>true</bool>
         </attribute>
-        <row/>
         <column>
          <property name="text">
           <string>Title</string>
@@ -180,41 +179,6 @@
           </font>
          </property>
         </column>
-        <item row="0" column="0">
-         <property name="text">
-          <string>To Sleep in a Sea of Stars</string>
-         </property>
-        </item>
-        <item row="0" column="1">
-         <property name="text">
-          <string>Christopher Paolini</string>
-         </property>
-        </item>
-        <item row="0" column="2">
-         <property name="text">
-          <string>858</string>
-         </property>
-        </item>
-        <item row="0" column="3">
-         <property name="text">
-          <string>Completed</string>
-         </property>
-        </item>
-        <item row="0" column="4">
-         <property name="text">
-          <string>100</string>
-         </property>
-        </item>
-        <item row="0" column="5">
-         <property name="text">
-          <string>&lt;button&gt;</string>
-         </property>
-        </item>
-        <item row="0" column="6">
-         <property name="text">
-          <string>&lt;button&gt;</string>
-         </property>
-        </item>
        </widget>
       </item>
      </layout>
