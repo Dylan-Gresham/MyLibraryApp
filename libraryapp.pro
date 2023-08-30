@@ -12,15 +12,18 @@ SOURCES += \
     Book.cpp \
     Library.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    newdialog.cpp
 
 HEADERS += \
     Book.h \
     Library.h \
-    mainwindow.h
+    mainwindow.h \
+    newdialog.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    newdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

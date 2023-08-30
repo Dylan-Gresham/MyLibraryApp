@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout" stretch="1,10,1">
+   <layout class="QVBoxLayout" name="verticalLayout" stretch="1,10,0">
     <property name="leftMargin">
      <number>0</number>
     </property>
@@ -28,19 +28,19 @@
      <number>0</number>
     </property>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QHBoxLayout" name="header">
       <property name="spacing">
        <number>12</number>
       </property>
       <item>
-       <widget class="QPushButton" name="pushButton_3">
+       <widget class="QPushButton" name="newButton">
         <property name="text">
          <string>New</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="delButton">
         <property name="text">
          <string>Delete</string>
         </property>
@@ -49,18 +49,63 @@
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <layout class="QHBoxLayout" name="content">
       <item>
-       <widget class="QTableWidget" name="tableWidget">
+       <widget class="QTableWidget" name="bookTable">
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="lineWidth">
+         <number>1</number>
+        </property>
+        <property name="autoScrollMargin">
+         <number>16</number>
+        </property>
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
         <property name="alternatingRowColors">
          <bool>true</bool>
         </property>
+        <property name="textElideMode">
+         <enum>Qt::ElideNone</enum>
+        </property>
+        <property name="sortingEnabled">
+         <bool>true</bool>
+        </property>
         <property name="rowCount">
-         <number>12</number>
+         <number>10</number>
         </property>
         <property name="columnCount">
-         <number>5</number>
+         <number>6</number>
         </property>
+        <attribute name="horizontalHeaderVisible">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="horizontalHeaderMinimumSectionSize">
+         <number>60</number>
+        </attribute>
+        <attribute name="horizontalHeaderHighlightSections">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="horizontalHeaderStretchLastSection">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderCascadingSectionResizes">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderMinimumSectionSize">
+         <number>60</number>
+        </attribute>
+        <attribute name="verticalHeaderDefaultSectionSize">
+         <number>100</number>
+        </attribute>
+        <attribute name="verticalHeaderStretchLastSection">
+         <bool>false</bool>
+        </attribute>
         <row/>
         <row/>
         <row/>
@@ -71,21 +116,107 @@
         <row/>
         <row/>
         <row/>
-        <row/>
-        <row/>
-        <column/>
-        <column/>
-        <column/>
-        <column/>
-        <column/>
+        <column>
+         <property name="text">
+          <string>Title</string>
+         </property>
+         <property name="font">
+          <font>
+           <bold>true</bold>
+          </font>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Author</string>
+         </property>
+         <property name="font">
+          <font>
+           <bold>true</bold>
+          </font>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Total Pages</string>
+         </property>
+         <property name="font">
+          <font>
+           <bold>true</bold>
+          </font>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Read Status</string>
+         </property>
+         <property name="font">
+          <font>
+           <bold>true</bold>
+          </font>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Rating</string>
+         </property>
+         <property name="font">
+          <font>
+           <bold>true</bold>
+          </font>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="font">
+          <font>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="textAlignment">
+          <set>AlignHCenter|AlignTop</set>
+         </property>
+        </column>
+        <item row="0" column="0">
+         <property name="text">
+          <string>To Sleep in a Sea of Stars</string>
+         </property>
+        </item>
+        <item row="0" column="1">
+         <property name="text">
+          <string>Christopher Paolini</string>
+         </property>
+        </item>
+        <item row="0" column="2">
+         <property name="text">
+          <string>858</string>
+         </property>
+        </item>
+        <item row="0" column="3">
+         <property name="text">
+          <string>Completed</string>
+         </property>
+        </item>
+        <item row="0" column="4">
+         <property name="text">
+          <string>100</string>
+         </property>
+        </item>
+        <item row="0" column="5">
+         <property name="text">
+          <string>&lt;button&gt;</string>
+         </property>
+        </item>
        </widget>
       </item>
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <layout class="QHBoxLayout" name="footer">
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="githubButton">
         <property name="text">
          <string>GitHub</string>
         </property>

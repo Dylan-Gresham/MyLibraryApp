@@ -3,8 +3,8 @@
 // Created by Dylan Gresham on 8/26/23.
 //
 
-#ifndef MYLIBRARYAPP_LIBRARY_H
-#define MYLIBRARYAPP_LIBRARY_H
+#ifndef LIBRARYAPP_LIBRARY_H
+#define LIBRARYAPP_LIBRARY_H
 
 #include "./Book.h"
 
@@ -76,4 +76,4 @@ class Library {
 };
 
 
-#endif //MYLIBRARYAPP_LIBRARY_H
+#endif // LIBRARYAPP_LIBRARY_H

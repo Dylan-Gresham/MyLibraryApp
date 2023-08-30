@@ -1,3 +1,8 @@
+//
+// main.cpp
+// Created by Dylan Gresham on 8/29/2023
+//
+
 #include "mainwindow.h"
 
 #include <QApplication>

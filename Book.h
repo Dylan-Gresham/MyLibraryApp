@@ -3,8 +3,8 @@
 // Created by Dylan Gresham on 8/25/23.
 //
 
-#ifndef MYLIBRARYAPP_BOOK_H
-#define MYLIBRARYAPP_BOOK_H
+#ifndef LIBRARYAPP_BOOK_H
+#define LIBRARYAPP_BOOK_H
 
 #include <string>
 using namespace std;
@@ -24,7 +24,7 @@ class Book {
          * @param author A string representing the author of the book.
          * @param numPages An int representing the number of pages in the book.
          * @param rating An int representing the rating of the book (-1 [negative one] if you don't want to give a rating yet).
-         * @param status An int representing your reading status of the book. 0 = planned, 1 = reading, 2 = dropped, 3 = aside, 4 = completed
+         * @param status An int representing your reading status of the book. 0 = planned, 1 = reading, 2 = completed, 3 = aside, 4 = dropped
          *
          * @return A Book object to the newly created Book object
         */
@@ -62,7 +62,7 @@ class Book {
         /**
          * Gets the current reading status of this Book.
          *
-         * @return The total number of pages of this book
+         * @return an int representing the current reading status of the Book. 0 = plan to read, 1 = reading, 2 = completed, 3 = aside, and 4 = dropped
         */
         int getReadingStatus();
 
@@ -105,11 +105,11 @@ class Book {
         /**
          * Sets the reading status of this Book to the specified new status.
          *
-         * @param newStatus - An int representing the new completion status of the specified book. Will replace the old status. 0 = planned, 1 = reading, 2 = dropped, 3 = aside, 4 = completed
+         * @param newStatus - An int representing the new completion status of the specified book. Will replace the old status. 0 = plan to read, 1 = reading, 2 = completed, 3 = aside, and 4 = dropped
          *
          * @return 0 on success, nonzero on error
         */
         void setStatus(int newStatus);
 };
 
-#endif //MYLIBRARYAPP_BOOK_H
+#endif // LIBRARYAPP_BOOK_H

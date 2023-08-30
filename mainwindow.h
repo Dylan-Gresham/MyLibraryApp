@@ -1,5 +1,10 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+//
+// mainwindow.h
+// Created by Dylan Gresham on 8/29/2023
+//
+
+#ifndef LIBRARYAPP_MAINWINDOW_H
+#define LIBRARYAPP_MAINWINDOW_H
 
 #include <QMainWindow>
 
@@ -15,7 +20,10 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_newButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
-#endif // MAINWINDOW_H
+#endif // LIBRARYAPP_MAINWINDOW_H
