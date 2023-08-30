@@ -74,7 +74,7 @@
          <bool>true</bool>
         </property>
         <property name="rowCount">
-         <number>12</number>
+         <number>0</number>
         </property>
         <property name="columnCount">
          <number>7</number>
@@ -106,66 +106,6 @@
         <attribute name="verticalHeaderStretchLastSection">
          <bool>true</bool>
         </attribute>
-        <row>
-         <property name="text">
-          <string>New Row</string>
-         </property>
-        </row>
-        <row>
-         <property name="text">
-          <string>New Row</string>
-         </property>
-        </row>
-        <row>
-         <property name="text">
-          <string>New Row</string>
-         </property>
-        </row>
-        <row>
-         <property name="text">
-          <string>New Row</string>
-         </property>
-        </row>
-        <row>
-         <property name="text">
-          <string>New Row</string>
-         </property>
-        </row>
-        <row>
-         <property name="text">
-          <string>New Row</string>
-         </property>
-        </row>
-        <row>
-         <property name="text">
-          <string>New Row</string>
-         </property>
-        </row>
-        <row>
-         <property name="text">
-          <string>New Row</string>
-         </property>
-        </row>
-        <row>
-         <property name="text">
-          <string>New Row</string>
-         </property>
-        </row>
-        <row>
-         <property name="text">
-          <string>New Row</string>
-         </property>
-        </row>
-        <row>
-         <property name="text">
-          <string>New Row</string>
-         </property>
-        </row>
-        <row>
-         <property name="text">
-          <string>New Row</string>
-         </property>
-        </row>
         <column>
          <property name="text">
           <string>Title</string>
@@ -239,76 +179,6 @@
           </font>
          </property>
         </column>
-        <item row="0" column="0">
-         <property name="text">
-          <string>Title 1</string>
-         </property>
-        </item>
-        <item row="0" column="1">
-         <property name="text">
-          <string/>
-         </property>
-        </item>
-        <item row="1" column="0">
-         <property name="text">
-          <string>Title 2</string>
-         </property>
-        </item>
-        <item row="1" column="1">
-         <property name="text">
-          <string/>
-         </property>
-        </item>
-        <item row="2" column="0">
-         <property name="text">
-          <string>Title 3</string>
-         </property>
-        </item>
-        <item row="3" column="0">
-         <property name="text">
-          <string>Title 4</string>
-         </property>
-        </item>
-        <item row="4" column="0">
-         <property name="text">
-          <string>Title 5</string>
-         </property>
-        </item>
-        <item row="5" column="0">
-         <property name="text">
-          <string>Title 6</string>
-         </property>
-        </item>
-        <item row="6" column="0">
-         <property name="text">
-          <string>Title 7</string>
-         </property>
-        </item>
-        <item row="7" column="0">
-         <property name="text">
-          <string>Title 8</string>
-         </property>
-        </item>
-        <item row="8" column="0">
-         <property name="text">
-          <string>Title 9</string>
-         </property>
-        </item>
-        <item row="9" column="0">
-         <property name="text">
-          <string>Title 10</string>
-         </property>
-        </item>
-        <item row="10" column="0">
-         <property name="text">
-          <string>Title 11</string>
-         </property>
-        </item>
-        <item row="11" column="0">
-         <property name="text">
-          <string>Title 12</string>
-         </property>
-        </item>
        </widget>
       </item>
      </layout>
