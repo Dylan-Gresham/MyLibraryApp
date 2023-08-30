@@ -29,6 +29,8 @@ private slots:
 
     void on_buttonBox_accepted();
 
+    void done(int r);
+
 private:
     Ui::NewDialog *ui;
 };

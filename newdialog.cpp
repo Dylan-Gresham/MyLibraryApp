@@ -18,6 +18,42 @@ NewDialog::~NewDialog()
     delete ui;
 }
 
+void NewDialog::done(int r)
+{
+    if(QDialog::Accepted == r) // OK was pressed
+    {
+        // Validate Input
+        if(this->ui->titleInputBox->text().size() > 0 && this->ui->authorInputBox->text().size() > 0
+            && this->ui->numPagesInputBox->value() > 0 &&
+            this->ui->titleInputBox->text().toStdString().compare("Invalid title!") != 0 &&
+            this->ui->authorInputBox->text().toStdString().compare("Invalid author!") != 0)
+        { // If all inputs are good
+            QDialog::done(r);
+            return;
+        } else { // One or more inputs are invalid
+            if(!(this->ui->titleInputBox->text().size() > 0)) // If title input was invalid
+            {
+                this->ui->titleInputBox->setText("Invalid title!"); // Set title text
+            }
+
+            if(!(this->ui->authorInputBox->text().size() > 0)) // If author input was invalid
+            {
+                this->ui->authorInputBox->setText("Invaild author!");
+            }
+
+            if(!(this->ui->numPagesInputBox->value() > 0)) // If numPages input was invalid
+            {
+                this->ui->numPagesInputBox->setValue(0); // Set numPages
+            }
+
+            return;
+        }
+    } else { // Cancel, close or exc was pressed
+        QDialog::done(r);
+        return;
+    }
+}
+
 void NewDialog::on_buttonBox_rejected()
 {
     reject();
@@ -37,9 +73,11 @@ void NewDialog::on_buttonBox_accepted()
     int newRating = returnInts[1];
     int newStatus = returnInts[2];
 
-    if(newTitle == "" || newAuthor == "") {
-        return;
-    }
+    // Add new inputs to Library as a Book
+
+    // Free memory using delete
+    delete [] returnInts;
+    delete [] returnStrings;
 
     accept();
 }
