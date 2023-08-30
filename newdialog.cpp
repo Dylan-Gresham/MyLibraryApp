@@ -5,6 +5,7 @@
 
 #include "newdialog.h"
 #include "ui_newdialog.h"
+#include "globalvars.h"
 
 NewDialog::NewDialog(QWidget *parent) :
     QDialog(parent),
@@ -49,6 +50,7 @@ void NewDialog::done(int r)
             return;
         }
     } else { // Cancel, close or exc was pressed
+        bookAddition = -1;
         QDialog::done(r);
         return;
     }
@@ -56,6 +58,7 @@ void NewDialog::done(int r)
 
 void NewDialog::on_buttonBox_rejected()
 {
+    bookAddition = -1;
     reject();
 }
 
@@ -74,6 +77,8 @@ void NewDialog::on_buttonBox_accepted()
     int newStatus = returnInts[2];
 
     // Add new inputs to Library as a Book
+    lib.addBook(newTitle, newAuthor, newNumPages, newRating, newStatus);
+    bookAddition = 1;
 
     // Free memory using delete
     delete [] returnInts;
