@@ -18,6 +18,7 @@ SOURCES += \
 HEADERS += \
     Book.h \
     Library.h \
+    globalvars.h \
     mainwindow.h \
     newdialog.h
 
