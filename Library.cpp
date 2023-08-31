@@ -113,7 +113,11 @@ void Library::addBook(std::string title, std::string author, int numPages, int r
     this->authorsMap[title]++;
     this->numAuthors = this->authorsMap.size();
 
-    sortLibrary();
+    if(this->booksVector.size() >= 2) {
+        sortLibrary();
+    }
+
+    return;
 }
 
 std::vector<Book> Library::getBooks() {
@@ -294,7 +298,10 @@ Book Library::findBook(std::string title) {
 
     int currSortingFunc = this->getSortingFunction(); // Get the original sorting order
     if(currSortingFunc != 1) {
-        sortLibrary(1); // Alphabetical by Title
+        // Sort if the booksVector has at least 2 Books in it
+        if(this->booksVector.size() >= 2) {
+            sortLibrary(1); // Alphabetical by Title
+        }
     }
 
     //  Perform a binary search
