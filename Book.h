@@ -70,8 +70,6 @@ class Book {
          * Sets the title of this Book to the specified title.
          *
          * @param newTitle - A string to replace the current title of the Book.
-         *
-         * @return 0 on success, nonzero on error
         */
         void setTitle(std::string newTitle);
 
@@ -79,8 +77,6 @@ class Book {
          * Sets the author of this Book to the specified author.
          *
          * @param newAuthor - A string to replace the current author of the Book.
-         *
-         * @return 0 on success, nonzero on error
         */
         void setAuthor(std::string newAuthor);
 
@@ -88,8 +84,6 @@ class Book {
          * Sets the total number of pages of this Book to the specified total number of pages.
          *
          * @param newNumPages - An int representing the new total number of pages of the specified book. Must be greater than 0 (newNumPages > 0).
-         *
-         * @return 0 on success, nonzero on error
         */
         void setNumPages(int newNumPages);
 
@@ -97,8 +91,6 @@ class Book {
          * Sets the rating of this Book to the specified new rating.
          *
          * @param newRating - An int representing the new rating to replace the current rating. Must be between 0 & 100 inclusive (0 <= newRating >= 100).
-         *
-         * @return 0 on success, nonzero on error
         */
         void setRating(int newRating);
 
@@ -106,8 +98,6 @@ class Book {
          * Sets the reading status of this Book to the specified new status.
          *
          * @param newStatus - An int representing the new completion status of the specified book. Will replace the old status. 0 = plan to read, 1 = reading, 2 = completed, 3 = aside, and 4 = dropped
-         *
-         * @return 0 on success, nonzero on error
         */
         void setStatus(int newStatus);
 };

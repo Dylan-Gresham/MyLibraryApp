@@ -25,6 +25,10 @@ private slots:
 
     void on_searchButton_clicked();
 
+    void editButtonClicked();
+
+    void removeButtonClicked();
+
 private:
     Ui::MainWindow *ui;
 };

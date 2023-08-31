@@ -80,7 +80,96 @@ void MainWindow::on_newButton_clicked()
         this->ui->bookTable->setItem(this->ui->bookTable->rowCount() - 1, 3, new QTableWidgetItem(statusQStr));
         this->ui->bookTable->setItem(this->ui->bookTable->rowCount() - 1, 4, new QTableWidgetItem(ratingQStr));
 
+        // Create, Center, & Add Edit Button
+        QWidget *ebWidget = new QWidget();
+        QPushButton *editButton = new QPushButton(QString::fromStdString("Edit"), this);
+        QHBoxLayout *editHboxLayout = new QHBoxLayout(ebWidget);
+        editHboxLayout->addWidget(editButton);
+        editHboxLayout->setAlignment(Qt::AlignCenter);
+        editHboxLayout->setContentsMargins(0, 0, 0, 0);
+        ebWidget->setLayout(editHboxLayout);
+        connect(editButton, &QPushButton::clicked, this, &MainWindow::editButtonClicked);
+        this->ui->bookTable->setCellWidget(this->ui->bookTable->rowCount(), 5, editButton);
+
+        // Create, Center, & Add Remove Button
+        QWidget *rbWidget = new QWidget();
+        QPushButton *removeButton = new QPushButton(QString::fromStdString("Remove"), this);
+        QHBoxLayout *removeHBoxLayout = new QHBoxLayout(rbWidget);
+        removeHBoxLayout->addWidget(removeButton);
+        removeHBoxLayout->setAlignment(Qt::AlignCenter);
+        removeHBoxLayout->setContentsMargins(0, 0, 0, 0);
+        rbWidget->setLayout(removeHBoxLayout);
+        connect(removeButton, &QPushButton::clicked, this, &MainWindow::removeButtonClicked);
+        this->ui->bookTable->setCellWidget(this->ui->bookTable->rowCount(), 6, removeButton);
+
         bookAddition = 0;
+    }
+}
+
+void MainWindow::editButtonClicked() {
+    // Get bookTable row
+    QWidget *parentWidget = qobject_cast<QWidget *>(sender()->parent()); // Gets parent widget
+    int row;
+    if(parentWidget) {
+        row = this->ui->bookTable->indexAt(parentWidget->pos()).row(); // Gets the row index if the parentWidget isn't a nullptr
+    } else {
+        return;
+    }
+
+    // Get book information from that row
+    std::string ogTitle = this->ui->bookTable->item(row, 0)->text().toStdString();
+    std::string ogAuthor = this->ui->bookTable->item(row, 1)->text().toStdString();
+    int ogNumPages = this->ui->bookTable->item(row, 2)->text().toInt();
+
+    int ogStatus;
+    std::string ogStatusValue = this->ui->bookTable->item(row, 3)->text().toStdString();
+    if(ogStatusValue.compare("Plan to Read") == 0) {
+        ogStatus = 0;
+    } else if(ogStatusValue.compare("Reading") == 0) {
+        ogStatus = 1;
+    } else if(ogStatusValue.compare("Complete") == 0) {
+        ogStatus = 2;
+    } else if(ogStatusValue.compare("Aside") == 0) {
+        ogStatus = 3;
+    } else if(ogStatusValue.compare("Dropped") == 0) {
+        ogStatus = 4;
+    } else {
+        ogStatus = -1;
+    }
+
+    if(ogStatus == -1) {
+        return;
+    }
+
+    int ogRating;
+    std::string ogRatingValue = this->ui->bookTable->item(row, 4)->text().toStdString();
+    if(ogRatingValue.compare("Awaiting Rating") == 0 || ogRatingValue.compare("Unknown") == 0) {
+        ogRating = -1; // Not yet rated value
+    } else {
+        ogRating = stoi(ogRatingValue); // String to Int function
+    }
+
+    // Find Library entry from Library->booksVector that matches
+    Book toEditBook = lib.findBook(ogTitle);
+
+    // Open Edit Dialog
+
+
+    // When Edit Dialog is accepted (i.e. not canceled or window closed), replace Library entry's info
+    // Update bookTable row with new info
+    /* Check Library->authorsMap for the original author, if the author name changed,
+     * decrement and increment new author (I think doing Library->authorsMap[oldAuthor]--
+     * and then Library->authorsMap[newAuthor]++ would accomplish this
+     */
+    // Return
+}
+
+void MainWindow::removeButtonClicked() {
+    QWidget *parentWidget = qobject_cast<QWidget *>(sender()->parent()); // Get the parent widget of the removeButton
+    if(parentWidget) {
+        int row = this->ui->bookTable->indexAt(parentWidget->pos()).row(); // Get the row index
+        this->ui->bookTable->removeRow(row);
+        this->ui->bookTable->setCurrentCell(row - 1, 0);
     }
 }
 
