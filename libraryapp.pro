@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     Book.cpp \
     Library.cpp \
+    editdialog.cpp \
     main.cpp \
     mainwindow.cpp \
     newdialog.cpp \
@@ -19,12 +20,14 @@ SOURCES += \
 HEADERS += \
     Book.h \
     Library.h \
+    editdialog.h \
     globalvars.h \
     mainwindow.h \
     newdialog.h \
     searchdialog.h
 
 FORMS += \
+    editdialog.ui \
     mainwindow.ui \
     newdialog.ui \
     searchdialog.ui
