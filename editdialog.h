@@ -15,6 +15,11 @@ public:
     explicit EditDialog(QWidget *parent = nullptr);
     ~EditDialog();
 
+private slots:
+    void on_buttonBox_accepted();
+
+    void on_buttonBox_rejected();
+
 private:
     Ui::EditDialog *ui;
 };

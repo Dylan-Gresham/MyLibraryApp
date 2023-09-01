@@ -12,3 +12,15 @@ EditDialog::~EditDialog()
 {
     delete ui;
 }
+
+void EditDialog::on_buttonBox_accepted()
+{
+    accept();
+}
+
+
+void EditDialog::on_buttonBox_rejected()
+{
+    reject();
+}
+
