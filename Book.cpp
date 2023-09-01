@@ -49,7 +49,7 @@ std::string Book::statusToStr() {
     }
 }
 
-std::string Book:statusToStr(int status) {
+std::string Book::statusToStr(int status) {
     if(status == 0) {
         return "Plan to Read";
     } else if(status == 1) {
