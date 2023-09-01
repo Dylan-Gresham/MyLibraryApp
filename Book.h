@@ -67,6 +67,20 @@ class Book {
         int getReadingStatus();
 
         /**
+         * Converts this Book's status to the corresponding string
+         *
+         * @return A string representing the decoded status code
+         */
+        std::string statusToStr();
+
+        /**
+         * Converts the provided status to the corresponding string
+         * @param status An int representing the status code to decode into a string
+         * @return A string representing the decoded status code
+         */
+        std::string statusToStr(int status);
+
+        /**
          * Sets the title of this Book to the specified title.
          *
          * @param newTitle - A string to replace the current title of the Book.

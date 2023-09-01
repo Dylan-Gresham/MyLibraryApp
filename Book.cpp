@@ -33,6 +33,38 @@ int Book::getReadingStatus() {
     return this->status;
 }
 
+std::string Book::statusToStr() {
+    if(this->status == 0) {
+        return "Plan to Read";
+    } else if(this->status == 1) {
+        return "Reading";
+    } else if(this->status == 2) {
+        return "Completed";
+    } else if(this->status == 3) {
+        return "Aside";
+    } else if(this->status == 4) {
+        return "Dropped";
+    } else {
+        return "Unknown";
+    }
+}
+
+std::string Book:statusToStr(int status) {
+    if(status == 0) {
+        return "Plan to Read";
+    } else if(status == 1) {
+        return "Reading";
+    } else if(status == 2) {
+        return "Completed";
+    } else if(status == 3) {
+        return "Aside";
+    } else if(status == 4) {
+        return "Dropped";
+    } else {
+        return "Unknown";
+    }
+}
+
 void Book::setTitle(std::string newTitle) {
     this->title = newTitle;
 }
