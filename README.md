@@ -14,3 +14,4 @@ This app was built using the [Qt Framework](https://www.qt.io/) and C++.
 - [Scroll to Specific item in QTableWidget](https://stackoverflow.com/questions/62217854/how-can-i-scroll-to-specific-row-in-qtableview)
 - [Determine Current Column Sorting in QTableWidget](https://stackoverflow.com/questions/11933487/which-column-is-data-sorted-by-qtablewidget)
 - [Dynamically Create QTableWidget Rows](https://stackoverflow.com/questions/6957943/how-to-add-new-row-to-existing-qtablewidget)
+- [Put Buttons into QTableWidget Rows](https://www.qtcentre.org/threads/70319-QTableWidget-with-a-column-of-buttons-How-do-I-get-whichone-is-clicked)

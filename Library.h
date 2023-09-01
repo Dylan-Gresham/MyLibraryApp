@@ -41,6 +41,14 @@ class Library {
         void addBook(string title, string author, int numPages, int rating, int status);
 
         /**
+         * Deletes the specified Book from the Library
+         *
+         * @param title A string containing the title of the book to be deleted
+         * @return 0 if the Book was found and deleted, -1 if the Book wasn't found
+         */
+        int deleteBook(string title);
+
+        /**
          * Gets the list of books in the library.
          *
          * @return A vector containing all the books currently in the library.

@@ -120,6 +120,22 @@ void Library::addBook(std::string title, std::string author, int numPages, int r
     return;
 }
 
+int Library::deleteBook(std::string title) {
+    std::vector<Book>::iterator currItr = this->booksVector.begin();
+    std::vector<Book>::iterator endItr = this->booksVector.end();
+
+    while(currItr.base() != endItr.base()) { // While the current iterator isn't pointing to the last Book
+        if(currItr->getTitle().compare(title) == 0) { // If the Book is found
+            this->booksVector.erase(currItr); // Erase it
+            return 0; // Stop looking and return success
+        } else { // If the Book isn't found yet
+            advance(currItr, 1); // Advance to the next index
+        }
+    }
+
+    return -1; // Book wasn't found, return fail
+}
+
 std::vector<Book> Library::getBooks() {
     return this->booksVector;
 }

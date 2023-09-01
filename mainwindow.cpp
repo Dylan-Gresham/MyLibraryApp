@@ -14,6 +14,8 @@
 #include <QTableWidgetItem>
 #include <QMessageBox>
 
+#include <iostream>
+
 int bookAddition;
 
 MainWindow::MainWindow(QWidget *parent)
@@ -80,30 +82,35 @@ void MainWindow::on_newButton_clicked()
         this->ui->bookTable->setItem(this->ui->bookTable->rowCount() - 1, 3, new QTableWidgetItem(statusQStr));
         this->ui->bookTable->setItem(this->ui->bookTable->rowCount() - 1, 4, new QTableWidgetItem(ratingQStr));
 
-        // Create, Center, & Add Edit Button
+        // Create, Center, & Add editButton
         QWidget *ebWidget = new QWidget();
-        QPushButton *editButton = new QPushButton(QString::fromStdString("Edit"), this);
+        QPushButton *editButton = new QPushButton();
+        editButton->setText("Edit");
         QHBoxLayout *editHboxLayout = new QHBoxLayout(ebWidget);
         editHboxLayout->addWidget(editButton);
         editHboxLayout->setAlignment(Qt::AlignCenter);
         editHboxLayout->setContentsMargins(0, 0, 0, 0);
         ebWidget->setLayout(editHboxLayout);
         connect(editButton, &QPushButton::clicked, this, &MainWindow::editButtonClicked);
-        this->ui->bookTable->setCellWidget(this->ui->bookTable->rowCount(), 5, editButton);
+        this->ui->bookTable->setCellWidget(this->ui->bookTable->rowCount() - 1, 5, ebWidget);
 
         // Create, Center, & Add Remove Button
         QWidget *rbWidget = new QWidget();
-        QPushButton *removeButton = new QPushButton(QString::fromStdString("Remove"), this);
+        QPushButton *removeButton = new QPushButton();
+        removeButton->setText("Remove");
         QHBoxLayout *removeHBoxLayout = new QHBoxLayout(rbWidget);
         removeHBoxLayout->addWidget(removeButton);
         removeHBoxLayout->setAlignment(Qt::AlignCenter);
         removeHBoxLayout->setContentsMargins(0, 0, 0, 0);
         rbWidget->setLayout(removeHBoxLayout);
         connect(removeButton, &QPushButton::clicked, this, &MainWindow::removeButtonClicked);
-        this->ui->bookTable->setCellWidget(this->ui->bookTable->rowCount(), 6, removeButton);
+        this->ui->bookTable->setCellWidget(this->ui->bookTable->rowCount() - 1, 6, rbWidget);
 
         bookAddition = 0;
-    }
+
+        cout << this->ui->bookTable->cellWidget(this->ui->bookTable->rowCount(), 5) << endl;
+        cout << this->ui->bookTable->cellWidget(this->ui->bookTable->rowCount(), 6) << endl;
+        }
 }
 
 void MainWindow::editButtonClicked() {
@@ -168,8 +175,16 @@ void MainWindow::removeButtonClicked() {
     QWidget *parentWidget = qobject_cast<QWidget *>(sender()->parent()); // Get the parent widget of the removeButton
     if(parentWidget) {
         int row = this->ui->bookTable->indexAt(parentWidget->pos()).row(); // Get the row index
+        std::string remTitle = this->ui->bookTable->item(row, 0)->text().toStdString(); // Get the title of the Book at that row
         this->ui->bookTable->removeRow(row);
         this->ui->bookTable->setCurrentCell(row - 1, 0);
+        int delBookPass = lib.deleteBook(remTitle);
+        if(delBookPass == -1) {
+            QMessageBox::information(this, tr("LibraryApp"),
+                                     QString::fromStdString(remTitle +
+                                                            " was not found in your Library database."),
+                                     QMessageBox::Ok);
+        }
     }
 }
 
