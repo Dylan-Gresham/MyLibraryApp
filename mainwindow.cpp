@@ -8,6 +8,7 @@
 #include "newdialog.h"
 #include "globalvars.h"
 #include "searchdialog.h"
+#include "editdialog.h"
 
 #include <QString>
 #include <QModelIndex>
@@ -123,52 +124,35 @@ void MainWindow::editButtonClicked() {
         return;
     }
 
-    // Get book information from that row
+    // Get the book title of the row
     std::string ogTitle = this->ui->bookTable->item(row, 0)->text().toStdString();
-    std::string ogAuthor = this->ui->bookTable->item(row, 1)->text().toStdString();
-    int ogNumPages = this->ui->bookTable->item(row, 2)->text().toInt();
-
-    int ogStatus;
-    std::string ogStatusValue = this->ui->bookTable->item(row, 3)->text().toStdString();
-    if(ogStatusValue.compare("Plan to Read") == 0) {
-        ogStatus = 0;
-    } else if(ogStatusValue.compare("Reading") == 0) {
-        ogStatus = 1;
-    } else if(ogStatusValue.compare("Complete") == 0) {
-        ogStatus = 2;
-    } else if(ogStatusValue.compare("Aside") == 0) {
-        ogStatus = 3;
-    } else if(ogStatusValue.compare("Dropped") == 0) {
-        ogStatus = 4;
-    } else {
-        ogStatus = -1;
-    }
-
-    if(ogStatus == -1) {
-        return;
-    }
-
-    int ogRating;
-    std::string ogRatingValue = this->ui->bookTable->item(row, 4)->text().toStdString();
-    if(ogRatingValue.compare("Awaiting Rating") == 0 || ogRatingValue.compare("Unknown") == 0) {
-        ogRating = -1; // Not yet rated value
-    } else {
-        ogRating = stoi(ogRatingValue); // String to Int function
-    }
 
     // Find Library entry from Library->booksVector that matches
     Book toEditBook = lib.findBook(ogTitle);
 
     // Open Edit Dialog
+    EditDialog* editDialog = new EditDialog(this, toEditBook);
+    editDialog->setModal(true);
+    editDialog->exec();
 
+    this->ui->bookTable->item(row, 0)->setText(QString::fromStdString(editDialog->book.getTitle()));
+    this->ui->bookTable->item(row, 1)->setText(QString::fromStdString(editDialog->book.getAuthor()));
+    this->ui->bookTable->item(row, 2)->setText(QString::number(editDialog->book.getNumPages()));
+    this->ui->bookTable->item(row, 3)->setText(QString::fromStdString(editDialog->book.statusToStr()));
+    if(editDialog->book.getRating() == -1) {
+        this->ui->bookTable->item(row, 4)->setText(QString::fromStdString("Awaiting Rating"));
+    } else {
+        this->ui->bookTable->item(row, 4)->setText(QString::number(editDialog->book.getRating()));
+    }
 
-    // When Edit Dialog is accepted (i.e. not canceled or window closed), replace Library entry's info
-    // Update bookTable row with new info
     /* Check Library->authorsMap for the original author, if the author name changed,
      * decrement and increment new author (I think doing Library->authorsMap[oldAuthor]--
      * and then Library->authorsMap[newAuthor]++ would accomplish this
      */
-    // Return
+    lib.getAuthors()[editDialog->originalData[1]]--;
+    lib.getAuthors()[editDialog->editedData[1]]++;
+
+    return;
 }
 
 void MainWindow::removeButtonClicked() {
@@ -222,4 +206,3 @@ void MainWindow::on_searchButton_clicked()
         }
     }
 }
-
