@@ -23,8 +23,8 @@ public:
     explicit EditDialog(QWidget *parent = nullptr, Book editingBook = Book("", "", 0, -1, 0));
     ~EditDialog();
     Book book = Book("", "", 0, -1, 0);
-    std::string* originalData;
-    std::string* editedData;
+    std::string originalData[5];
+    std::string editedData[5];
 
 private slots:
     void on_buttonBox_accepted();

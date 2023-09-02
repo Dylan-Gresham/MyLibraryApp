@@ -191,6 +191,10 @@ void Library::sortLibrary() {
 }
 
 void Library::sortLibrary(int sortFunction) {
+    if(this->numBooks < 2) {
+        return;
+    }
+
     if(sortFunction < 0 || sortFunction > 7) {
         return;
     } else if(sortFunction == 0) {
