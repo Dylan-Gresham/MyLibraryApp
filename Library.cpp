@@ -10,48 +10,94 @@
 using namespace std;
 
 // Sorting functions
-bool sortAlphabeticalAuthor(Book one, Book two) {
-    if(one.getAuthor().compare(two.getAuthor()) > 0) {
+int sortAlphabeticalAuthor(Book& one, Book& two) {
+    // Split Author names
+    char oneNameCopy[one.getAuthor().length()];
+    char* oneFirstName = strtok(oneNameCopy, " ");
+    char* oneLastName = strtok(oneNameCopy, " ");
+
+    char twoNameCopy[two.getAuthor().length()];
+    char* twoFirstName = strtok(twoNameCopy, " ");
+    char* twoLastName = strtok(twoNameCopy, " ");
+
+    // Check if last names are equal:
+    int lastNameCompare = strcasecmp(oneLastName, twoLastName);
+
+    // Determine return value
+    if(lastNameCompare == 0) { // If one.last() == two.last(), check first names
+        // Check if first names are equal:
+        int firstNameCompare = strcasecmp(oneFirstName, twoFirstName);
+
+        // Determine return value
+        if(firstNameCompare == 0) { // If one.first() == two.first()
+            return 0;
+        } else if(firstNameCompare < 0) { // If one.first() < two.first()
+            return -1;
+        } else { // If one.first() > two.first()
+            return 1;
+        }
+    } else if(lastNameCompare > 0) { // If one.last() > two.last()
         return 1;
-    } else if(one.getAuthor().compare(two.getAuthor()) < 0) {
+    } else { // If one.last() < two.last()
+        return -1;
+    }
+}
+
+int sortAlphabeticalTitle(Book one, Book two) {
+    if(strcasecmp(one.getTitle().c_str(), two.getTitle().c_str()) > 0) {
+        return 1;
+    } else if(strcasecmp(one.getTitle().c_str(), two.getTitle().c_str()) < 0) {
         return -1;
     } else {
         return 0;
     }
 }
 
-bool sortAlphabeticalTitle(Book one, Book two) {
-    if(one.getTitle().compare(two.getTitle()) > 0) {
+int reverseSortAlphabeticalAuthor(Book one, Book two) {
+    // Split Author names
+    char oneNameCopy[one.getAuthor().length()];
+    char* oneFirstName = strtok(oneNameCopy, " ");
+    char* oneLastName = strtok(oneNameCopy, " ");
+
+    char twoNameCopy[two.getAuthor().length()];
+    char* twoFirstName = strtok(twoNameCopy, " ");
+    char* twoLastName = strtok(twoNameCopy, " ");
+
+    // Check if last names are equal:
+    int lastNameCompare = strcasecmp(oneLastName, twoLastName);
+
+    // Determine return value
+    if(lastNameCompare == 0) { // If one.last() == two.last(), check first names
+        // Check if first names are equal:
+        int firstNameCompare = strcasecmp(oneFirstName, twoFirstName);
+
+        // Determine return value
+        if(firstNameCompare == 0) { // If one.first() == two.first()
+            return 0;
+        } else if(firstNameCompare < 0) { // If one.first() < two.first()
+            return -1;
+        } else { // If one.first() > two.first()
+            return 1;
+        }
+    } else if(lastNameCompare > 0) { // If one.last() > two.last()
         return 1;
-    } else if(one.getTitle().compare(two.getTitle()) < 0) {
+    } else { // If one.last() < two.last()
         return -1;
+    }
+}
+
+
+int reverseSortAlphabeticalTitle(Book one, Book two) {
+    if(strcasecmp(one.getTitle().c_str(), two.getTitle().c_str()) > 0) {
+        return -1;
+    } else if(strcasecmp(one.getTitle().c_str(), two.getTitle().c_str()) < 0) {
+        return 1;
     } else {
         return 0;
     }
 }
 
-bool reverseSortAlphabeticalAuthor(Book one, Book two) {
-    if(one.getAuthor().compare(two.getAuthor()) > 0) {
-        return -1;
-    } else if(one.getAuthor().compare(two.getAuthor()) < 0) {
-        return 1;
-    } else {
-        return 0;
-    }
-}
-
-
-bool reverseSortAlphabeticalTitle(Book one, Book two) {
-    if(one.getTitle().compare(two.getTitle()) > 0) {
-        return -1;
-    } else if(one.getTitle().compare(two.getTitle()) < 0) {
-        return 1;
-    } else {
-        return 0;
-    }
-}
-
-bool sortDescendingNumPages(Book one, Book two) {
+int sortDescendingNumPages(Book one, Book two) {
     if(one.getNumPages() > two.getNumPages()) {
         return 1;
     } else if(one.getNumPages() < two.getNumPages()) {
@@ -61,7 +107,7 @@ bool sortDescendingNumPages(Book one, Book two) {
     }
 }
 
-bool sortDescendingRating(Book one, Book two) {
+int sortDescendingRating(Book one, Book two) {
     if(one.getRating() > two.getRating()) {
         return 1;
     } else if(one.getRating() < two.getRating()) {
@@ -71,7 +117,7 @@ bool sortDescendingRating(Book one, Book two) {
     }
 }
 
-bool sortAscendingNumPages(Book one, Book two) {
+int sortAscendingNumPages(Book one, Book two) {
     if(one.getNumPages() > two.getNumPages()) {
         return -1;
     } else if(one.getNumPages() < two.getNumPages()) {
@@ -81,7 +127,7 @@ bool sortAscendingNumPages(Book one, Book two) {
     }
 }
 
-bool sortAscendingRating(Book one, Book two) {
+int sortAscendingRating(Book one, Book two) {
     if(one.getRating() > two.getRating()) {
         return -1;
     } else if(one.getRating() < two.getRating()) {
