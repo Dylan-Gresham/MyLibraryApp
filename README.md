@@ -8,7 +8,7 @@ This app was built using the [Qt Framework](https://www.qt.io/) and C++.
 ## Sources
 
 ### QtCentre
-- [Put Buttins in a QTableWidget Column](https://www.qtcentre.org/threads/70319-QTableWidget-with-a-column-of-buttons-How-do-I-get-whichone-is-clicked)
+- [Put Buttons in a QTableWidget Column](https://www.qtcentre.org/threads/70319-QTableWidget-with-a-column-of-buttons-How-do-I-get-whichone-is-clicked)
 
 ### Stack Overflow
 - [Scroll to Specific item in QTableWidget](https://stackoverflow.com/questions/62217854/how-can-i-scroll-to-specific-row-in-qtableview)
