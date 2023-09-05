@@ -6,8 +6,9 @@
 #ifndef LIBRARYAPP_NEWDIALOG_H
 #define LIBRARYAPP_NEWDIALOG_H
 
+#include "Book.h"
+
 #include <QDialog>
-#include <string>
 
 namespace Ui {
 class NewDialog;
@@ -20,6 +21,7 @@ class NewDialog : public QDialog
 public:
     std::string* getStrings();
     int* getInts();
+    Book returnBook = Book("", "", "", 0, -1, 4);
 
     explicit NewDialog(QWidget *parent = nullptr);
     ~NewDialog();

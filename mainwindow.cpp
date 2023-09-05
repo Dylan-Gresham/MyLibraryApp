@@ -43,22 +43,22 @@ void MainWindow::on_newButton_clicked()
 
     if(bookAddition == 1) {
         // Get values from most recent book and store in proper Q variables
-        QString titleQStr = QString::fromStdString(lib.getBooks().back().getTitle());
-        QString authorQStr = QString::fromStdString(lib.getBooks().back().getAuthor());
-        QString numPagesQStr = QString::number(lib.getBooks().back().getNumPages());
+        QString titleQStr = QString::fromStdString(dialog->returnBook.getTitle());
+        QString authorQStr = QString::fromStdString(dialog->returnBook.getAuthor());
+        QString numPagesQStr = QString::number(dialog->returnBook.getNumPages());
 
         QString ratingQStr;
         // Determine which value to place for rating
-        if(lib.getBooks().back().getRating() == -1) {
+        if(dialog->returnBook.getRating() == -1) {
             ratingQStr = QString::fromStdString("Awaiting Rating");
-        } else if(lib.getBooks().back().getRating() >= 0) {
-            ratingQStr = QString::number(lib.getBooks().back().getRating());
+        } else if(dialog->returnBook.getRating() >= 0) {
+            ratingQStr = QString::number(dialog->returnBook.getRating());
         } else {
             ratingQStr = QString::fromStdString("Unknown");
         }
 
         // Determine which value to place for status
-        QString statusQStr = QString::fromStdString(lib.getBooks().back().statusToStr());
+        QString statusQStr = QString::fromStdString(dialog->returnBook.statusToStr());
 
          // Append a new row to the table
         this->ui->bookTable->insertRow(this->ui->bookTable->rowCount());
@@ -149,7 +149,7 @@ void MainWindow::removeButtonClicked() {
         this->ui->bookTable->removeRow(row);
         this->ui->bookTable->setCurrentCell(row - 1, 0);
         int delBookPass = lib.deleteBook(remTitle);
-        if(delBookPass == -1) {
+        if(delBookPass < 0) {
             QMessageBox::information(this, tr("LibraryApp"),
                                      QString::fromStdString(remTitle +
                                                             " was not found in your Library database."),
