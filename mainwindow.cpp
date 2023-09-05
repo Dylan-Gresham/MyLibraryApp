@@ -197,29 +197,34 @@ void MainWindow::on_searchButton_clicked()
 }
 
 void MainWindow::sortIndicatorChanged(int column, Qt::SortOrder sortOrder) {
-    int newSortFunction = -1;
+    int newSortFunction;
     if(column == 0) { // Title column
-        newSortFunction = 1; // Alphabetical by title
+        newSortFunction = 1; // Alphabetical by title (asc)
     } else if(column == 1) { // Author column
-        newSortFunction = 0; // Alphabetical by author
+        newSortFunction = 0; // Alphabetical by author (asc)
     } else if(column == 2) { // Total # of Pages column
-        newSortFunction = 4; // Descending by totalNumPages
+        newSortFunction = 4; // Descending by totalNumPages (desc)
     } else if(column == 3) { // Status column
-        newSortFunction = 8; // Descending by status
+        newSortFunction = 8; // Descending by status (desc)
     } else if(column == 4) { // Rating column
-        newSortFunction = 5; // Descending by rating
+        newSortFunction = 5; // Descending by rating (desc)
     } else {
         newSortFunction = 0;
     }
 
-    if(sortOrder == 0) {
-        if(newSortFunction <= 1 || (newSortFunction <= 5 && newSortFunction > 3)) {
+    if(sortOrder == 0) { // If want in asc
+        if(newSortFunction == 4 || newSortFunction == 5) {
             newSortFunction += 2;
-        } else {
+        } else if(newSortFunction == 8) {
             newSortFunction++;
+        }
+    } else { // If want in desc
+        if(newSortFunction <= 1) {
+            newSortFunction += 2;
         }
     }
 
+    // Update sorting function and then Sort
     lib.setSortingFunction(newSortFunction);
     lib.sortLibrary();
 
