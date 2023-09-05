@@ -7,6 +7,7 @@
 #define LIBRARYAPP_MAINWINDOW_H
 
 #include <QMainWindow>
+#include <Qt>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -28,6 +29,8 @@ private slots:
     void editButtonClicked();
 
     void removeButtonClicked();
+
+    void sortIndicatorChanged(int column, Qt::SortOrder sortOrder);
 
 private:
     Ui::MainWindow *ui;

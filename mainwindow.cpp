@@ -25,6 +25,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     bookAddition = 0;
     ui->setupUi(this);
+
+    connect(this->ui->bookTable->horizontalHeader(), SIGNAL(sortIndicatorChanged(int,Qt::SortOrder)),
+            this, SLOT(sortIndicatorChanged(int,Qt::SortOrder)));
 }
 
 MainWindow::~MainWindow()
@@ -191,4 +194,34 @@ void MainWindow::on_searchButton_clicked()
                                      QMessageBox::Ok);
         }
     }
+}
+
+void MainWindow::sortIndicatorChanged(int column, Qt::SortOrder sortOrder) {
+    int newSortFunction = -1;
+    if(column == 0) { // Title column
+        newSortFunction = 1; // Alphabetical by title
+    } else if(column == 1) { // Author column
+        newSortFunction = 0; // Alphabetical by author
+    } else if(column == 2) { // Total # of Pages column
+        newSortFunction = 4; // Descending by totalNumPages
+    } else if(column == 3) { // Status column
+        newSortFunction = 8; // Descending by status
+    } else if(column == 4) { // Rating column
+        newSortFunction = 5; // Descending by rating
+    } else {
+        newSortFunction = 0;
+    }
+
+    if(sortOrder == 0) {
+        if(newSortFunction <= 1 || (newSortFunction <= 5 && newSortFunction > 3)) {
+            newSortFunction += 2;
+        } else {
+            newSortFunction++;
+        }
+    }
+
+    lib.setSortingFunction(newSortFunction);
+    lib.sortLibrary();
+
+    return;
 }
