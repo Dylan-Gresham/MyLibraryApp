@@ -5,9 +5,10 @@
 
 #include "Book.h"
 
-Book::Book(std::string title, std::string author, int numPages, int rating, int status) {
+Book::Book(std::string title, std::string authorFirstName, std::string authorLastName, int numPages, int rating, int status) {
     this->title = title;
-    this->author = author;
+    this->authorFirstName = authorFirstName;
+    this->authorLastName = authorLastName;
     this->numPages = numPages;
     this->rating = rating;
     this->status = status;
@@ -18,7 +19,15 @@ std::string Book::getTitle() {
 }
 
 std::string Book::getAuthor() {
-    return this->author;
+    return this->authorFirstName + " " + this->authorLastName;
+}
+
+std::string Book::getAuthorFirstName() {
+    return this->authorFirstName;
+}
+
+std::string Book::getAuthorLastName() {
+    return this->authorFirstName;
 }
 
 int Book::getNumPages() {
@@ -69,8 +78,12 @@ void Book::setTitle(std::string newTitle) {
     this->title = newTitle;
 }
 
-void Book::setAuthor(std::string newAuthor) {
-    this->author = newAuthor;
+void Book::setAuthorFirstName(std::string newAuthorFirstName) {
+    this->authorFirstName = newAuthorFirstName;
+}
+
+void Book::setAuthorLastName(std::string newAuthorLastName) {
+    this->authorLastName = newAuthorLastName;
 }
 
 void Book::setNumPages(int newNumPages) {

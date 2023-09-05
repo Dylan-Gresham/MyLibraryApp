@@ -31,7 +31,17 @@
        <item>
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>Author:</string>
+          <string>Author First Name:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>Author Last Name:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -75,11 +85,17 @@
        <property name="spacing">
         <number>12</number>
        </property>
+       <property name="topMargin">
+        <number>5</number>
+       </property>
        <item>
         <widget class="QLineEdit" name="titleInput"/>
        </item>
        <item>
-        <widget class="QLineEdit" name="authorInput"/>
+        <widget class="QLineEdit" name="authorFirstInput"/>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="authorLastInput"/>
        </item>
        <item>
         <widget class="QSpinBox" name="numPagesInput">
@@ -95,7 +111,7 @@
          </property>
          <item>
           <property name="text">
-           <string>Plan to Read</string>
+           <string>Plan To Read</string>
           </property>
          </item>
          <item>

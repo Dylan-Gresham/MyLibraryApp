@@ -33,12 +33,13 @@ class Library {
          * Adds the specified book to the library.
          *
          * @param title A string containing the title of the book to be added
-         * @param author A string containing the author of the book to be added
+         * @param authorFirstName A string containing the author's first name of the book to be added
+         * @param authorLastname A string containing the author's last name of the book to be added
          * @param numPages An int representing the total number of pages in the book
          * @param rating An int representing the rating of the book (-1 [negative one] if you don't want to give a rating yet).
          * @param status An int representing your reading status of the book. 0 = planned, 1 = reading, 2 = dropped, 3 = aside, 4 = completed
          */
-        void addBook(string title, string author, int numPages, int rating, int status);
+        void addBook(string title, string authorFirstName, string authorLastName, int numPages, int rating, int status);
 
         /**
          * Deletes the specified Book from the Library

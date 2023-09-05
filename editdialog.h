@@ -20,11 +20,11 @@ class EditDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit EditDialog(QWidget *parent = nullptr, Book editingBook = Book("", "", 0, -1, 0));
+    explicit EditDialog(QWidget *parent = nullptr, Book editingBook = Book("", "", "", 0, -1, 0));
     ~EditDialog();
-    Book book = Book("", "", 0, -1, 0);
-    std::string originalData[5];
-    std::string editedData[5];
+    Book book = Book("", "", "", 0, -1, 0);
+    std::string originalData[6];
+    std::string editedData[6];
 
 private slots:
     void on_buttonBox_accepted();

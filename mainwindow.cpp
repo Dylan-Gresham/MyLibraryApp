@@ -108,10 +108,7 @@ void MainWindow::on_newButton_clicked()
         this->ui->bookTable->setCellWidget(this->ui->bookTable->rowCount() - 1, 6, rbWidget);
 
         bookAddition = 0;
-
-        cout << this->ui->bookTable->cellWidget(this->ui->bookTable->rowCount(), 5) << endl;
-        cout << this->ui->bookTable->cellWidget(this->ui->bookTable->rowCount(), 6) << endl;
-        }
+    }
 }
 
 void MainWindow::editButtonClicked() {

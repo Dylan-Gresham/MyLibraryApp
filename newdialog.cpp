@@ -24,10 +24,10 @@ void NewDialog::done(int r)
     if(QDialog::Accepted == r) // OK was pressed
     {
         // Validate Input
-        if(this->ui->titleInputBox->text().size() > 0 && this->ui->authorInputBox->text().size() > 0
+        if(this->ui->titleInputBox->text().size() > 0 && this->ui->authorFirstInputBox->text().size() > 0
             && this->ui->numPagesInputBox->value() > 0 &&
             this->ui->titleInputBox->text().toStdString().compare("Invalid title!") != 0 &&
-            this->ui->authorInputBox->text().toStdString().compare("Invalid author!") != 0)
+            this->ui->authorFirstInputBox->text().toStdString().compare("Invalid author!") != 0)
         { // If all inputs are good
             QDialog::done(r);
             return;
@@ -36,10 +36,10 @@ void NewDialog::done(int r)
             {
                 this->ui->titleInputBox->setText("Invalid title!"); // Set title text
             }
-
-            if(!(this->ui->authorInputBox->text().size() > 0)) // If author input was invalid
+            
+            if(!(this->ui->authorFirstInputBox->text().size() > 0)) // If author input was invalid
             {
-                this->ui->authorInputBox->setText("Invaild author!");
+                this->ui->authorFirstInputBox->setText("Invaild author!");
             }
 
             if(!(this->ui->numPagesInputBox->value() > 0)) // If numPages input was invalid
@@ -71,13 +71,14 @@ void NewDialog::on_buttonBox_accepted()
 
     // Assign inputs to individual variables
     std::string newTitle = returnStrings[0];
-    std::string newAuthor = returnStrings[1];
+    std::string newAuthorFirstName = returnStrings[1];
+    std::string newAuthorLastName = returnStrings[2];
     int newNumPages = returnInts[0];
     int newRating = returnInts[1];
     int newStatus = returnInts[2];
 
     // Add new inputs to Library as a Book
-    lib.addBook(newTitle, newAuthor, newNumPages, newRating, newStatus);
+    lib.addBook(newTitle, newAuthorFirstName, newAuthorLastName, newNumPages, newRating, newStatus);
     bookAddition = 1;
 
     // Free memory using delete
@@ -90,12 +91,14 @@ void NewDialog::on_buttonBox_accepted()
 std::string* NewDialog::getStrings() {
     // Get valuse from inputs
     std::string newTitle = this->ui->titleInputBox->text().toStdString();
-    std::string newAuthor = this->ui->authorInputBox->text().toStdString();
+    std::string newAuthorFirstName = this->ui->authorFirstInputBox->text().toStdString();
+    std::string newAuthorLastName = this->ui->authorLastInputBox->text().toStdString();
 
     // Create array
     std::string* strArr = new std::string[2];
     strArr[0] = newTitle;
-    strArr[1] = newAuthor;
+    strArr[1] = newAuthorFirstName;
+    strArr[2] = newAuthorLastName;
 
     // Return array
     return strArr;

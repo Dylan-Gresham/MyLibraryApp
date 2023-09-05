@@ -4,7 +4,6 @@
 //
 
 #include "Library.h"
-#include "globalvars.h"
 
 #include <cstring>
 using namespace std;
@@ -145,8 +144,8 @@ Library::Library() {
     // when the constructor is called
 }
 
-void Library::addBook(std::string title, std::string author, int numPages, int rating, int status) {
-    Book newBook = Book(title, author, numPages, rating, status);
+void Library::addBook(std::string title, std::string authorFirstName, std::string authorLastName, int numPages, int rating, int status) {
+    Book newBook = Book(title, authorFirstName, authorLastName, numPages, rating, status);
     this->booksVector.push_back(newBook);
     this->numBooks = this->booksVector.size();
     /*
@@ -218,21 +217,21 @@ bool Library::isEmpty() {
 
 void Library::sortLibrary() {
     if(this->sortFunction == 0) {
-        return std::sort(lib.getBooks().begin(), lib.getBooks().end(), sortAlphabeticalAuthor);
+        return std::sort(this->booksVector.begin(), this->booksVector.end(), sortAlphabeticalAuthor);
     } else if(this->sortFunction == 1) {
-        return std::sort(lib.getBooks().begin(), lib.getBooks().end(), sortAlphabeticalTitle);
+        return std::sort(this->booksVector.begin(), this->booksVector.end(), sortAlphabeticalTitle);
     } else if(this->sortFunction == 2) {
-        return std::sort(lib.getBooks().begin(), lib.getBooks().end(), reverseSortAlphabeticalAuthor);
+        return std::sort(this->booksVector.begin(), this->booksVector.end(), reverseSortAlphabeticalAuthor);
     } else if(this->sortFunction == 3) {
-        return std::sort(lib.getBooks().begin(), lib.getBooks().end(), reverseSortAlphabeticalTitle);
+        return std::sort(this->booksVector.begin(), this->booksVector.end(), reverseSortAlphabeticalTitle);
     } else if(this->sortFunction == 4) {
-        return std::sort(lib.getBooks().begin(), lib.getBooks().end(), sortDescendingNumPages);
+        return std::sort(this->booksVector.begin(), this->booksVector.end(), sortDescendingNumPages);
     } else if(this->sortFunction == 5) {
-        return std::sort(lib.getBooks().begin(), lib.getBooks().end(), sortDescendingRating);
+        return std::sort(this->booksVector.begin(), this->booksVector.end(), sortDescendingRating);
     } else if(this->sortFunction == 6) {
-        return std::sort(lib.getBooks().begin(), lib.getBooks().end(), sortAscendingNumPages);
+        return std::sort(this->booksVector.begin(), this->booksVector.end(), sortAscendingNumPages);
     } else {
-        return std::sort(lib.getBooks().begin(), lib.getBooks().end(), sortAscendingRating);
+        return std::sort(this->booksVector.begin(), this->booksVector.end(), sortAscendingRating);
     }
 }
 
@@ -244,21 +243,21 @@ void Library::sortLibrary(int sortFunction) {
     if(sortFunction < 0 || sortFunction > 7) {
         return;
     } else if(sortFunction == 0) {
-        return std::sort(lib.getBooks().begin(), lib.getBooks().end(), sortAlphabeticalAuthor);
+        return std::sort(this->booksVector.begin(), this->booksVector.end(), sortAlphabeticalAuthor);
     } else if(sortFunction == 1) {
-        return std::sort(lib.getBooks().begin(), lib.getBooks().end(), sortAlphabeticalTitle);
+        return std::sort(this->booksVector.begin(), this->booksVector.end(), sortAlphabeticalTitle);
     } else if(sortFunction == 2) {
-        return std::sort(lib.getBooks().begin(), lib.getBooks().end(), reverseSortAlphabeticalAuthor);
+        return std::sort(this->booksVector.begin(), this->booksVector.end(), reverseSortAlphabeticalAuthor);
     } else if(sortFunction == 3) {
-        return std::sort(lib.getBooks().begin(), lib.getBooks().end(), reverseSortAlphabeticalTitle);
+        return std::sort(this->booksVector.begin(), this->booksVector.end(), reverseSortAlphabeticalTitle);
     } else if(sortFunction == 4) {
-        return std::sort(lib.getBooks().begin(), lib.getBooks().end(), sortDescendingNumPages);
+        return std::sort(this->booksVector.begin(), this->booksVector.end(), sortDescendingNumPages);
     } else if(sortFunction == 5) {
-        return std::sort(lib.getBooks().begin(), lib.getBooks().end(), sortDescendingRating);
+        return std::sort(this->booksVector.begin(), this->booksVector.end(), sortDescendingRating);
     } else if(sortFunction == 6) {
-        return std::sort(lib.getBooks().begin(), lib.getBooks().end(), sortAscendingNumPages);
+        return std::sort(this->booksVector.begin(), this->booksVector.end(), sortAscendingNumPages);
     } else {
-        return std::sort(lib.getBooks().begin(), lib.getBooks().end(), sortAscendingRating);
+        return std::sort(this->booksVector.begin(), this->booksVector.end(), sortAscendingRating);
     }
 }
 
@@ -359,7 +358,7 @@ Book* vectorBinarySearch(std::vector<Book> vector, std::vector<Book>::iterator s
 
 Book Library::findBook(std::string title) {
     if(title.compare("") == 0) {
-        return Book("", "", 0, -1, 4);
+        return Book("", "", "", 0, -1, 4);
     }
 
     int currSortingFunc = this->getSortingFunction(); // Get the original sorting order
@@ -378,7 +377,7 @@ Book Library::findBook(std::string title) {
     // If it's a nullptr (aka not found in the bookVector) return newly constructed Book with blank title and author
     // If it's not a nullptr (aka it WAS found in the bookVector) return the dereferenced Book pointer that was found
     if(foundBookPtr == nullptr) {
-        return Book("", "", 0 , -1, 4);
+        return Book("", "", "", 0 , -1, 4);
     } else {
         return *foundBookPtr;
     }
