@@ -33,22 +33,22 @@ int sortAlphabeticalAuthor(Book& one, Book& two) {
         if(firstNameCompare == 0) { // If one.first() == two.first()
             return 0;
         } else if(firstNameCompare < 0) { // If one.first() < two.first()
-            return -1;
-        } else { // If one.first() > two.first()
             return 1;
+        } else { // If one.first() > two.first()
+            return -1;
         }
     } else if(lastNameCompare > 0) { // If one.last() > two.last()
-        return 1;
-    } else { // If one.last() < two.last()
         return -1;
+    } else { // If one.last() < two.last()
+        return 1;
     }
 }
 
 int sortAlphabeticalTitle(Book one, Book two) {
     if(strcasecmp(one.getTitle().c_str(), two.getTitle().c_str()) > 0) {
-        return 1;
-    } else if(strcasecmp(one.getTitle().c_str(), two.getTitle().c_str()) < 0) {
         return -1;
+    } else if(strcasecmp(one.getTitle().c_str(), two.getTitle().c_str()) < 0) {
+        return 1;
     } else {
         return 0;
     }
@@ -78,23 +78,23 @@ int reverseSortAlphabeticalAuthor(Book one, Book two) {
         if(firstNameCompare == 0) { // If one.first() == two.first()
             return 0;
         } else if(firstNameCompare < 0) { // If one.first() < two.first()
-            return -1;
-        } else { // If one.first() > two.first()
             return 1;
+        } else { // If one.first() > two.first()
+            return -1;
         }
     } else if(lastNameCompare > 0) { // If one.last() > two.last()
-        return 1;
-    } else { // If one.last() < two.last()
         return -1;
+    } else { // If one.last() < two.last()
+        return 1;
     }
 }
 
 
 int reverseSortAlphabeticalTitle(Book one, Book two) {
     if(strcasecmp(one.getTitle().c_str(), two.getTitle().c_str()) > 0) {
-        return -1;
-    } else if(strcasecmp(one.getTitle().c_str(), two.getTitle().c_str()) < 0) {
         return 1;
+    } else if(strcasecmp(one.getTitle().c_str(), two.getTitle().c_str()) < 0) {
+        return -1;
     } else {
         return 0;
     }

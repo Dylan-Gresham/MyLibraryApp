@@ -143,6 +143,8 @@ class Library {
          * 5 = Descending by Rating
          * 6 = Ascending by Total Page Number
          * 7 = Ascending by Rating
+         * 8 = Descending by Status
+         * 9 = Ascending by Status
          *
          * @param sort An int representnig the sorting function to use
          */
