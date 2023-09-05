@@ -10,14 +10,16 @@ using namespace std;
 
 // Sorting functions
 int sortAlphabeticalAuthor(Book& one, Book& two) {
-    // Split Author names
-    char oneNameCopy[one.getAuthor().length()];
-    char* oneFirstName = strtok(oneNameCopy, " ");
-    char* oneLastName = strtok(oneNameCopy, " ");
+    // Get Author names
+    char oneFirstName[one.getAuthorFirstName().length() + 1];
+    strncpy(oneFirstName, one.getAuthorFirstName().c_str(), one.getAuthorFirstName().length());
+    char oneLastName[one.getAuthorLastName().length() + 1];
+    strncpy(oneLastName, one.getAuthorLastName().c_str(), one.getAuthorLastName().length());
 
-    char twoNameCopy[two.getAuthor().length()];
-    char* twoFirstName = strtok(twoNameCopy, " ");
-    char* twoLastName = strtok(twoNameCopy, " ");
+    char twoFirstName[two.getAuthorFirstName().length() + 1];
+    strncpy(twoFirstName, two.getAuthorFirstName().c_str(), two.getAuthorFirstName().length());
+    char twoLastName[two.getAuthorLastName().length() + 1];
+    strncpy(twoLastName, two.getAuthorLastName().c_str(), two.getAuthorLastName().length());
 
     // Check if last names are equal:
     int lastNameCompare = strcasecmp(oneLastName, twoLastName);
@@ -53,14 +55,16 @@ int sortAlphabeticalTitle(Book one, Book two) {
 }
 
 int reverseSortAlphabeticalAuthor(Book one, Book two) {
-    // Split Author names
-    char oneNameCopy[one.getAuthor().length()];
-    char* oneFirstName = strtok(oneNameCopy, " ");
-    char* oneLastName = strtok(oneNameCopy, " ");
+    // Get Author names
+    char oneFirstName[one.getAuthorFirstName().length() + 1];
+    strncpy(oneFirstName, one.getAuthorFirstName().c_str(), one.getAuthorFirstName().length());
+    char oneLastName[one.getAuthorLastName().length() + 1];
+    strncpy(oneLastName, one.getAuthorLastName().c_str(), one.getAuthorLastName().length());
 
-    char twoNameCopy[two.getAuthor().length()];
-    char* twoFirstName = strtok(twoNameCopy, " ");
-    char* twoLastName = strtok(twoNameCopy, " ");
+    char twoFirstName[two.getAuthorFirstName().length() + 1];
+    strncpy(twoFirstName, two.getAuthorFirstName().c_str(), two.getAuthorFirstName().length());
+    char twoLastName[two.getAuthorLastName().length() + 1];
+    strncpy(twoLastName, two.getAuthorLastName().c_str(), two.getAuthorLastName().length());
 
     // Check if last names are equal:
     int lastNameCompare = strcasecmp(oneLastName, twoLastName);
@@ -147,7 +151,8 @@ Library::Library() {
 void Library::addBook(std::string title, std::string authorFirstName, std::string authorLastName, int numPages, int rating, int status) {
     Book newBook = Book(title, authorFirstName, authorLastName, numPages, rating, status);
     this->booksVector.push_back(newBook);
-    this->numBooks = this->booksVector.size();
+    this->numBooks++;
+
     /*
      *  According to
      *  https://stackoverflow.com/questions/72841438/how-to-store-array-data-as-map-key-or-increment-frequency-if-array-already-in-ma
@@ -172,6 +177,7 @@ int Library::deleteBook(std::string title) {
     while(currItr.base() != endItr.base()) { // While the current iterator isn't pointing to the last Book
         if(currItr->getTitle().compare(title) == 0) { // If the Book is found
             this->booksVector.erase(currItr); // Erase it
+            this->numBooks--;
             return 0; // Stop looking and return success
         } else { // If the Book isn't found yet
             advance(currItr, 1); // Advance to the next index
@@ -262,22 +268,6 @@ void Library::sortLibrary(int sortFunction) {
 }
 
 /**
- * Method from StackOverflow:
- * https://stackoverflow.com/a/313990/18649233
- *
- * Converts the designated string to lowercase
- *
- * @param str The string to convert to lowercase
- * @return A lowercase copy of the parameter string
- */
-std::string strToLower(std::string str) {
-    std::string retStr = str.substr(0, str.length());
-    transform(retStr.begin(), retStr.end(), retStr.begin(), [](unsigned char c){return std::tolower(c);});
-
-    return retStr;
-}
-
-/**
  * Helper function for the vectorBinarySearch() method
  *
  * @param vector The vector to perform the binary search on
@@ -288,9 +278,9 @@ std::string strToLower(std::string str) {
  * @return A pointer to the Book if found, otherwise returns nullptr
  */
 Book* vectorBSHelper(std::vector<Book> vector, std::vector<Book>::iterator startItr, std::vector<Book>::iterator endItr, size_t vectorSize, std::string searchValue) {
-    if(strToLower(startItr->getTitle()).compare(strToLower(searchValue)) == 0) { // If it's the first Book
+    if(strcasecmp(startItr->getTitle().c_str(), searchValue.c_str()) == 0) { // If it's the first Book
         return startItr.base();
-    } else if(strToLower(endItr->getTitle()).compare(strToLower(searchValue)) == 0) { // If it's the last Book
+    } else if(strcasecmp(endItr->getTitle().c_str(), searchValue.c_str()) == 0) { // If it's the last Book
         return endItr.base();
     } else if(vectorSize <= 2) { // If it's not the first or last Book but there's only 2 Books left to search through
         return nullptr;
@@ -301,10 +291,10 @@ Book* vectorBSHelper(std::vector<Book> vector, std::vector<Book>::iterator start
         std::vector<Book>::iterator midItr = vector.begin();
         advance(midItr, (vectorSize - 2) / 2); // - 2 on the vectorSize since we already checked the first and last books
 
-        if(strToLower(midItr->getTitle()).compare(strToLower(searchValue)) > 0) {
+        if(strcasecmp(midItr->getTitle().c_str(), searchValue.c_str()) > 0) {
             // If the middle Book is greater (alphabetically comes after), only search from the starItr --> midItr
             return vectorBSHelper(vector, startItr, midItr, (vectorSize - 2) / 2, searchValue);
-        } else if(strToLower(midItr->getTitle()).compare(strToLower(searchValue)) < 0) {
+        } else if(strcasecmp(midItr->getTitle().c_str(), searchValue.c_str()) < 0) {
             // If the middle Book is lesser (alphabetically comes before), only search from the starItr --> vector.end() - 1
             advance(midItr, 1);
 
@@ -327,9 +317,9 @@ Book* vectorBSHelper(std::vector<Book> vector, std::vector<Book>::iterator start
  * @return A pointer to the Book object if it's found in the vector, nullptr if not found
  */
 Book* vectorBinarySearch(std::vector<Book> vector, std::vector<Book>::iterator startItr, size_t vectorSize, std::string searchValue) {
-    if(strToLower(startItr->getTitle()).compare(strToLower(searchValue)) == 0) { // If it's the first Book
+    if(strcasecmp(startItr->getTitle().c_str(), searchValue.c_str()) == 0) { // If it's the first Book
         return startItr.base();
-    } else if(strToLower(vector.end()->getTitle()).compare(strToLower(searchValue)) == 0) { // If it's the last Book
+    } else if(strcasecmp(vector.end()->getTitle().c_str(), searchValue.c_str()) == 0) { // If it's the last Book
         return vector.end().base();
     } else if(vector.size() <= 2) {
         return nullptr;
@@ -340,10 +330,10 @@ Book* vectorBinarySearch(std::vector<Book> vector, std::vector<Book>::iterator s
         std::vector<Book>::iterator midItr = vector.begin();
         advance(midItr, (vectorSize - 2) / 2); // - 2 on the vectorSize since we already checked the first and last books
 
-        if(strToLower(midItr->getTitle()).compare(strToLower(searchValue)) > 0) {
+        if(strcasecmp(midItr->getTitle().c_str(), searchValue.c_str()) > 0) {
             // If the middle Book is greater (alphabetically comes after), only search from the starItr --> midItr
             return vectorBSHelper(vector, startItr, midItr, (vectorSize - 2) / 2, searchValue);
-        } else if(strToLower(midItr->getTitle()).compare(strToLower(searchValue)) < 0) {
+        } else if(strcasecmp(midItr->getTitle().c_str(), searchValue.c_str()) < 0) {
             // If the middle Book is lesser (alphabetically comes before), only search from the starItr --> vector.end() - 1
             advance(midItr, 1);
 

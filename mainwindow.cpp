@@ -3,17 +3,17 @@
 // Created by Dylan Gresham on 8/29/2023
 //
 
-#include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "newdialog.h"
-#include "globalvars.h"
 #include "searchdialog.h"
+#include "mainwindow.h"
+#include "globalvars.h"
 #include "editdialog.h"
+#include "newdialog.h"
 
-#include <QString>
-#include <QModelIndex>
 #include <QTableWidgetItem>
 #include <QMessageBox>
+#include <QModelIndex>
+#include <QString>
 
 #include <iostream>
 
@@ -57,21 +57,8 @@ void MainWindow::on_newButton_clicked()
             ratingQStr = QString::fromStdString("Unknown");
         }
 
-        QString statusQStr;
         // Determine which value to place for status
-        if(lib.getBooks().back().getReadingStatus() == 0) {
-            statusQStr = QString::fromStdString("Plan to Read");
-        } else if(lib.getBooks().back().getReadingStatus() == 1) {
-            statusQStr = QString::fromStdString("Reading");
-        } else if(lib.getBooks().back().getReadingStatus() == 2) {
-            statusQStr = QString::fromStdString("Completed");
-        } else if(lib.getBooks().back().getReadingStatus() == 3) {
-            statusQStr = QString::fromStdString("Aside");
-        } else if(lib.getBooks().back().getReadingStatus() == 4) {
-            statusQStr = QString::fromStdString("Dropped");
-        } else {
-            statusQStr = QString::fromStdString("Unknown");
-        }
+        QString statusQStr = QString::fromStdString(lib.getBooks().back().statusToStr());
 
          // Append a new row to the table
         this->ui->bookTable->insertRow(this->ui->bookTable->rowCount());
@@ -143,8 +130,10 @@ void MainWindow::editButtonClicked() {
     }
 
     /* Check Library->authorsMap for the original author, if the author name changed,
-     * decrement and increment new author (I think doing Library->authorsMap[oldAuthor]--
-     * and then Library->authorsMap[newAuthor]++ would accomplish this
+     * decrement and increment new author
+     *
+     * I think doing Library->authorsMap[oldAuthor]-- and then Library->authorsMap[newAuthor]++
+     * would accomplish this
      */
     lib.getAuthors()[editDialog->originalData[1]]--;
     lib.getAuthors()[editDialog->editedData[1]]++;

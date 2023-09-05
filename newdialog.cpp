@@ -25,9 +25,10 @@ void NewDialog::done(int r)
     {
         // Validate Input
         if(this->ui->titleInputBox->text().size() > 0 && this->ui->authorFirstInputBox->text().size() > 0
-            && this->ui->numPagesInputBox->value() > 0 &&
-            this->ui->titleInputBox->text().toStdString().compare("Invalid title!") != 0 &&
-            this->ui->authorFirstInputBox->text().toStdString().compare("Invalid author!") != 0)
+            && this->ui->authorLastInputBox->text().size() > 0 && this->ui->numPagesInputBox->value() > 0
+            && this->ui->titleInputBox->text().toStdString().compare("Invalid title!") != 0
+            && this->ui->authorFirstInputBox->text().toStdString().compare("Invalid first name!") != 0
+            && this->ui->authorLastInputBox->text().toStdString().compare("Invalud last name!") != 0)
         { // If all inputs are good
             QDialog::done(r);
             return;
@@ -37,9 +38,13 @@ void NewDialog::done(int r)
                 this->ui->titleInputBox->setText("Invalid title!"); // Set title text
             }
             
-            if(!(this->ui->authorFirstInputBox->text().size() > 0)) // If author input was invalid
+            if(!(this->ui->authorFirstInputBox->text().size() > 0)) // If first name input was invalid
             {
-                this->ui->authorFirstInputBox->setText("Invaild author!");
+                this->ui->authorFirstInputBox->setText("Invaild first name!");
+            }
+
+            if(!(this->ui->authorLastInputBox->text().size() > 0)) { // If last name input was invalid
+                this->ui->authorLastInputBox->setText("Invalid last name!");
             }
 
             if(!(this->ui->numPagesInputBox->value() > 0)) // If numPages input was invalid
