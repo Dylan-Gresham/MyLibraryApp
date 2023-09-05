@@ -160,7 +160,28 @@ void Library::addBook(std::string title, std::string authorFirstName, std::strin
      *  and if it isn't in the map it adds it with default value of 0 and then increments it
      *  to 1 which is exactly what I want to do. TODO: Will need to test this.
      */
-    this->authorsMap[title]++;
+    this->authorsMap[authorFirstName + authorLastName]++;
+    this->numAuthors = this->authorsMap.size();
+
+    if(this->booksVector.size() >= 2) {
+        sortLibrary();
+    }
+
+    return;
+}
+
+void Library::addBook(Book book) {
+    this->booksVector.push_back(book);
+    this->numBooks++;
+
+    /*
+     *  According to
+     *  https://stackoverflow.com/questions/72841438/how-to-store-array-data-as-map-key-or-increment-frequency-if-array-already-in-ma
+     *  if you just use the increment operator on a map key it'll increment it if it's in the map
+     *  and if it isn't in the map it adds it with default value of 0 and then increments it
+     *  to 1 which is exactly what I want to do. TODO: Will need to test this.
+     */
+    this->authorsMap[book.getAuthor()]++;
     this->numAuthors = this->authorsMap.size();
 
     if(this->booksVector.size() >= 2) {
